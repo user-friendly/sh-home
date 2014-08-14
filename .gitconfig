@@ -1,0 +1,23 @@
+[user]
+    email = @user_mail@
+    name = @user_first_name@ @user_last_name@
+
+[core]
+    repositoryformatversion = 0
+    filemode = false
+    bare = false
+    logallrefupdates = true
+    symlinks = false
+    ignorecase = true
+    hideDotFiles = dotGitOnly
+    editor = emacs
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+    mergeoptions = --no-ff
+    
+[commit]
+    template = ~/.git_commit_template
+[color]
+	ui = true
+[alias]
+	co = checkout
