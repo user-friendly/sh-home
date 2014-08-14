@@ -31,6 +31,7 @@ alias a='ls -A'
 
 alias gs='git status'
 alias gp='git pull'
+alias grp='git reset --hard; gp'
 alias gco='git checkout'
 
 alias dr='drush'
