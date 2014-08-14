@@ -30,6 +30,7 @@ alias aa='ls'
 alias a='ls -A'
 
 alias gs='git status'
+alias gp='git pull'
 alias gco='git checkout'
 
 alias dr='drush'
