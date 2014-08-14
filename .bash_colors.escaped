@@ -1,0 +1,77 @@
+# 
+# Some useful color variable definitions.
+# See https://wiki.archlinux.org/index.php/Color_Bash_Prompt#List_of_colors_for_prompt_and_Bash
+# 
+
+# Reset
+E_Color_Off='\[\e[0m\]'       # Text Reset
+
+# Regular Colors
+E_Black='\[\e[0;30m\]'        # Black
+E_Red='\[\e[0;31m\]'          # Red
+E_Green='\[\e[0;32m\]'        # Green
+E_Yellow='\[\e[0;33m\]'       # Yellow
+E_Blue='\[\e[0;34m\]'         # Blue
+E_Purple='\[\e[0;35m\]'       # Purple
+E_Cyan='\[\e[0;36m\]'         # Cyan
+E_White='\[\e[0;37m\]'        # White
+
+# Bold
+E_BBlack='\[\e[1;30m\]'       # Black
+E_BRed='\[\e[1;31m\]'         # Red
+E_BGreen='\[\e[1;32m\]'       # Green
+E_BYellow='\[\e[1;33m\]'      # Yellow
+E_BBlue='\[\e[1;34m\]'        # Blue
+E_BPurple='\[\e[1;35m\]'      # Purple
+E_BCyan='\[\e[1;36m\]'        # Cyan
+E_BWhite='\[\e[1;37m\]'       # White
+
+# Underline
+E_UBlack='\[\e[4;30m\]'       # Black
+E_URed='\[\e[4;31m\]'         # Red
+E_UGreen='\[\e[4;32m\]'       # Green
+E_UYellow='\[\e[4;33m\]'      # Yellow
+E_UBlue='\[\e[4;34m\]'        # Blue
+E_UPurple='\[\e[4;35m\]'      # Purple
+E_UCyan='\[\e[4;36m\]'        # Cyan
+E_UWhite='\[\e[4;37m\]'       # White
+
+# Background
+E_On_Black='\[\e[40m\]'       # Black
+E_On_Red='\[\e[41m\]'         # Red
+E_On_Green='\[\e[42m\]'       # Green
+E_On_Yellow='\[\e[43m\]'      # Yellow
+E_On_Blue='\[\e[44m\]'        # Blue
+E_On_Purple='\[\e[45m\]'      # Purple
+E_On_Cyan='\[\e[46m\]'        # Cyan
+E_On_White='\[\e[47m\]'       # White
+
+# High Intensity
+E_IBlack='\[\e[0;90m\]'       # Black
+E_IRed='\[\e[0;91m\]'         # Red
+E_IGreen='\[\e[0;92m\]'       # Green
+E_IYellow='\[\e[0;93m\]'      # Yellow
+E_IBlue='\[\e[0;94m\]'        # Blue
+E_IPurple='\[\e[0;95m\]'      # Purple
+E_ICyan='\[\e[0;96m\]'        # Cyan
+E_IWhite='\[\e[0;97m\]'       # White
+
+# Bold High Intensity
+E_BIBlack='\[\e[1;90m\]'      # Black
+E_BIRed='\[\e[1;91m\]'        # Red
+E_BIGreen='\[\e[1;92m\]'      # Green
+E_BIYellow='\[\e[1;93m\]'     # Yellow
+E_BIBlue='\[\e[1;94m\]'       # Blue
+E_BIPurple='\[\e[1;95m\]'     # Purple
+E_BICyan='\[\e[1;96m\]'       # Cyan
+E_BIWhite='\[\e[1;97m\]'      # White
+
+# High Intensity backgrounds
+E_On_IBlack='\[\e[0;100m\]'   # Black
+E_On_IRed='\[\e[0;101m\]'     # Red
+E_On_IGreen='\[\e[0;102m\]'   # Green
+E_On_IYellow='\[\e[0;103m\]'  # Yellow
+E_On_IBlue='\[\e[0;104m\]'    # Blue
+E_On_IPurple='\[\e[0;105m\]'  # Purple
+E_On_ICyan='\[\e[0;106m\]'    # Cyan
+E_On_IWhite='\[\e[0;107m\]'   # White

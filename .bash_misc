@@ -1,0 +1,167 @@
+# 
+# Miscellaneous terminal goodies.
+# 
+
+export PATH="$PATH:$HOME/bin"
+
+# Load color definitions.
+if [ -f ~/.bash_colors ]; then
+    . ~/.bash_colors
+fi
+# Escaped colors (useful for the command prompt).
+if [ -f ~/.bash_colors.escaped ]; then
+    . ~/.bash_colors.escaped
+fi
+
+# Some useful aliases.
+# demand confirmation for the following
+LS_BASE_OPTIONS='-hx'
+alias ls="ls $LS_BASE_OPTIONS"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Display color control chars only.
+alias less='less -R'
+
+alias ll='ls -l'
+alias l='ls -lA'
+alias aa='ls'
+alias a='ls -A'
+
+alias gs='git status'
+alias gco='git checkout'
+
+alias dr='drush'
+alias drms='drush -r /apps/mags/docroot -l marthastewart.com'
+alias drmw='drush -r /apps/mags/docroot -l marthastewartweddings.com'
+alias drwl='drush -r /apps/mags/docroot -l wholeliving.com'
+alias drug='drush -r /apps/ugc/docroot -l default'
+alias drd='drush-debug'
+alias drdms='drd -r /apps/mags/docroot -l marthastewart.com'
+alias drdmw='drd -r /apps/mags/docroot -l marthastewartweddings.com'
+alias drdwl='drd -r /apps/mags/docroot -l wholeliving.com'
+alias drdug='drd -r /apps/ugc/docroot -l default'
+
+# Custom completion functions (mostly for git aliases).
+if [ -f ~/.bash_completion ]; then
+    . ~/.bash_completion
+fi
+
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls $LS_BASE_OPTIONS --color=auto'
+    
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Helper functions.
+function drush-debug {
+    export XDEBUG_CONFIG="idekey=PHPSTORM"
+    export SERVER_NAME="pivanov.dev"
+    export SERVER_PORT="9000"
+    drush $*
+    unset XDEBUG_CONFIG
+    unset SERVER_NAME
+    unset SERVER_PORT
+};
+
+function function_exists() {
+    declare -f -F $1;
+    return $?;
+}
+
+function _fancy_ps1_git_status_bar {
+    local cur_branch="$(__git_ps1 '%s')"
+    if [ -z "${cur_branch}" ]; then
+	echo ""
+	return 1
+    fi
+    
+    echo -en "${Color_Off}${IWhite}branch ${BIYellow}${cur_branch}${Color_Off}"
+    
+    return 0
+}
+
+function _user_ps1 {
+    if [ "$" == "${USER_TYPE_SIGN}" ]; then
+	echo -en "${Color_Off}${IWhite}$USER${Color_Off}"
+	return 0
+    else
+	echo -en "${Color_Off}${Red}$USER${Color_Off}"
+	return 0
+    fi
+}
+
+# Dollar sign for non-root users, hashtag for root.
+function _user_type_sign {
+    if [ "root" == "${USER}" ]; then
+	echo -n '#'
+	return 0
+    else
+	echo -n '$'
+	return 0
+    fi
+}
+
+function _move_cursor {
+    echo -en "\e[$1;$2H"
+    return 0
+}
+
+function _clear_line {
+    echo -en "\e[${COLUMNS}D\e[K"
+    return 0
+}
+
+function _status_bar {
+    if [ -z "${FANCY_PS1_STATUS_BAR}" ]; then
+	return 0
+    fi
+    
+    local git_status="$(_fancy_ps1_git_status_bar)"
+    
+    
+    _move_cursor 1 1
+    _clear_line
+    
+    if [ ! -z "${git_status}" ]; then
+	echo -en "${git_status}"
+	_move_cursor 2 1
+    fi
+    
+    echo -en "${FANCY_PS1_STATUS_BAR}"
+    
+    _move_cursor $LINES 1
+    return 0
+}
+
+function _command_status {
+    ecoh -en "$?"
+}
+
+# Prompt
+# The hash (#) tag is used to signify root users and the dollar sign ($)
+# is used for non-root users. Notice the signifying character at the end
+# of the prompt.
+# Are we an interactive shell?
+if [ "$PS1" ]; then
+    USER_TYPE_SIGN="$(_user_type_sign)"
+    # TODO Base on hostname, change color.
+    HOSTNAME_TEMP="${On_IGreen}${BIBlack}pivanov.dev${Color_Off}"
+    FANCY_PS1_STATUS_BAR="${Red}$USER${Color_Off}@${HOSTNAME_TEMP} ${BWhite}$(pwd)${Color_Off}"
+
+    
+    FANCY_PS1_PREFIX="\$(_fancy_ps1_git_status_bar)\n${E_Yellow}\t${E_Color_Off}"
+    FANCY_PS1_SUFFIX=" "
+    
+    FANCY_PS1="${FANCY_PS1_PREFIX} \$(_user_ps1)@${HOSTNAME_TEMP} ${E_BWhite}\w${E_Color_Off}\n${USER_TYPE_SIGN}>${FANCY_PS1_SUFFIX}"
+
+    # TODO Detect type of terminal, have multiple prompts for each terminal
+    # or make a base modular and add/remove/replace elements.
+    export PS1="$FANCY_PS1"
+fi;

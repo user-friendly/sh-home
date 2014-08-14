@@ -1,0 +1,199 @@
+#!/bin/sh
+########################################################################
+# Fix file permissions and ownership.
+# 
+#
+########################################################################
+
+OPTIONS=$(getopt -n "$0" -o f:d:o:g:rv --long "file-permissions:,directory-permissions:,owner:,group:,recursive,verbose,dry-run" -- "$@")
+
+FILE_PERM="0644"
+DIR_PERM="0755"
+OWNER=""
+GROUP=""
+CHOWN="chown"
+CHMOD="chmod"
+RECURSIVE="no"
+DRY_RUN="no"
+VERBOSE="no"
+
+change_perm() {
+    # CHMOD should never be empty!
+    if [ "yes" = "$DRY_RUN" ]; then
+	echo "$CHMOD $2 $1"
+    else
+	_echo "$CHMOD $2 $1"
+	$CHMOD $2 $1
+    fi
+    
+    return $?
+};
+
+change_owner() {
+    # Owner does not change?
+    if [ -z "$CHOWN" ]; then
+	return 0
+    fi
+    
+    if [ "yes" = "$DRY_RUN" ]; then
+	echo "$CHOWN $1"
+    else
+	_echo "$CHOWN $1"
+	$CHOWN $1
+    fi
+    
+    return $?
+};
+
+fix_file_perms_owner() {
+    __FILE="$1"
+    __PERM="$2"
+    
+    change_perm "$__FILE" "$__PERM"
+    RET=$?
+    if [ ! 0 -eq "$RET" ]; then
+	exit $RET
+    fi
+
+    change_owner "$__FILE"
+    RET=$?
+    if [ ! 0 -eq "$RET" ]; then
+	exit 1;
+    fi
+}
+
+_echo() {
+    if [ "yes" = "$VERBOSE" ]; then
+	echo "$@"
+    fi
+}
+
+if [ $? != 0 ] ; then echo "getopt failed..." >&2 ; exit 1 ; fi
+
+# Some magic taken from /usr/share/doc/util-linux/examples/getopt-parse.bash
+eval set -- "$OPTIONS"
+
+while true ; do
+    case "$1" in
+	-f|--file-permissions)
+	    if [ ! -z "$2" ]; then
+		FILE_PERM="$2"
+	    fi
+	    shift 2
+	    ;;
+	-d|--directory-permissions)
+	    if [ ! -z "$2" ]; then
+		DIR_PREM="$2"
+	    fi
+	    shift 2
+	    ;;
+	-o|--owner)
+	    if [ ! -z "$2" ]; then
+		OWNER="$2"
+	    fi
+	    shift 2
+	    ;;
+	-g|--group)
+	    if [ ! -z "$2" ]; then
+		GROUP="$2"
+	    fi
+	    shift 2
+	    ;;
+	-r|--recursive)
+	    RECURSIVE="yes"
+	    shift
+	    ;;
+	--dry-run)
+	    DRY_RUN="yes"
+	    shift
+	    ;;
+	-v|--verbose)
+	    VERBOSE="yes"
+	    shift
+	    ;;
+	--)
+	    shift
+	    break
+	    ;;
+	*)
+	    echo "$0: internal error!"
+	    exit 1
+	    ;;
+    esac
+done
+
+if [ "$#" -eq 0 ]; then
+    echo "usage: $0 file1 file2 dir1 dir2"
+    echo "parameters:"
+    echo "\t-v, --verbose - verbose output"
+    echo "\t-f, --file-permissions - file permissions as passed to chmod"
+    echo "\t-d, --directory-permissions - dir permissions as passed to chmod"
+    echo "\t-o, --owner - owner as passed to chown"
+    echo "\t-g, --group - group as passed to chown"
+    echo "\t-r, --recursive - descend into subdirectories"
+    echo "\t--dry-run - do a dry run, just echo the commands to be executed"
+    exit 0
+fi
+
+_echo "using file permissions: ${FILE_PERM}"
+_echo "using dir permissions: ${DIR_PERM}"
+if [ ! -z "$OWNER" ]; then _echo "changing owner to: ${OWNER}"; fi
+if [ ! -z "$GROUP" ]; then _echo "changing group to: ${GROUP}"; fi
+if [ "yes" = "$RECURSIVE" ]; then _echo "will descend into directories"; fi
+if [ "yes" = "$DRY_RUN" ]; then _echo "dry run"; fi
+
+if [ -z "$OWNER$GROUP" ]; then
+    CHOWN=""
+fi
+
+if [ -z "$OWNER" ] && [ ! -z "$GROUP" ]; then
+    echo "$0: an owner must be set when the group is set"
+    exit 1
+elif [ ! -z "$OWNER" ] && [ -z "$GROUP" ]; then
+    CHOWN="chown $OWNER"
+elif [ ! -z "$OWNER" ] && [ ! -z "$GROUP" ]; then
+    CHOWN="chown $OWNER:$GROUP"
+fi
+
+for file; do
+    if [ -d "$file" ]; then
+	
+	if [ "yes" = "$RECURSIVE" ]; then
+	    
+	    #ALL_DIRS=$(find "$file" -type d)
+	    #ALL_FILES=$(find "$file" -type f)
+	    
+	    # Find all subdirectories.
+	    for f in $(find "$file" -type d); do
+		fix_file_perms_owner "$f" "$DIR_PERM"
+	    done
+	    
+	    # Find all files in all subdirectories.
+	    for f in $(find "$file" -type f); do
+		fix_file_perms_owner "$f" "$FILE_PERM"
+	    done
+	    
+	else
+	    fix_file_perms_owner "$file" "$DIR_PERM"
+	fi
+	
+	# Onto the next file in the list.
+	continue
+    fi
+    
+    # For regular files things are much easier.
+    if [ -f "$file" ]; then
+	fix_file_perms_owner "$file" "$FILE_PERM"
+	# Onto the next file in the list.
+	continue
+    fi
+    
+    # File not found? Report error and exit.
+    if [ ! -a "$file" ]; then
+	echo "$0: file not found: ${file}"
+	exit 1
+    fi
+done
+
+exit 0
+
