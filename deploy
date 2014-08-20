@@ -1,0 +1,47 @@
+#!/bin/sh
+
+BASE_DIR="$1"
+TARGET_DIR="$2"
+
+HOME_CONF_DIRS="bin"
+HOME_CONF_FILES=".bash_colors .bash_completion bin/ffpog .gitconfig .bash_colors.escaped .bash_misc .emacs .git_commit_template .gitignore_global"
+
+mkdir="mkdir"
+
+link="ln -s"
+
+if [ "Z$BASE_DIR" = "Z" ]; then
+    BASE_DIR="$(pwd)"
+fi
+
+if [ "Z$TARGET_DIR" = "Z" ]; then
+    TARGET_DIR="$HOME"
+fi
+
+
+if [ ! -r "$BASE_DIR" ]; then
+    echo "base dir does not exist or is not readable"
+    exit 1
+fi
+
+if [ ! -w "$TARGET_DIR" ]; then
+    echo "target dir does not exist or is not writeable"
+    exit 1
+fi
+
+for dir in $HOME_CONF_DIRS; do
+    if [ ! -w "$TARGET_DIR/$dir" ]; then
+	$mkdir "$TARGET_DIR/$dir"
+    else
+	echo "dir already exists: $TARGET_DIR/$dir"
+    fi
+done
+
+for file in $HOME_CONF_FILES; do
+    if [ ! -f "$TARGET_DIR/$file" ]; then
+	$link "$BASE_DIR/$file" "$TARGET_DIR/$file"
+    else
+	echo "file already exists: $TARGET_DIR/$dir"
+    fi 
+done
+
