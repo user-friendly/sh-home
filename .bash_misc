@@ -152,9 +152,12 @@ function _command_status {
 # of the prompt.
 # Are we an interactive shell?
 if [ "$PS1" ]; then
+    if [ "Z$HOSTNAME" = "Z" ]; then
+        HOSTNAME="UNKNOWN-HOST"
+    fi
     USER_TYPE_SIGN="$(_user_type_sign)"
     # TODO Base on hostname, change color.
-    HOSTNAME_TEMP="${On_IGreen}${BIBlack}pivanov.dev${Color_Off}"
+    HOSTNAME_TEMP="${On_IGreen}${BIBlack}$HOSTNAME${Color_Off}"
     FANCY_PS1_STATUS_BAR="${Red}$USER${Color_Off}@${HOSTNAME_TEMP} ${BWhite}$(pwd)${Color_Off}"
 
     
