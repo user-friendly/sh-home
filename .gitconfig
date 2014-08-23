@@ -6,7 +6,7 @@
     symlinks = false
     ignorecase = true
     hideDotFiles = dotGitOnly
-    editor = emacs
+    editor = editor
     excludesfile = ~/.gitignore_global
     autocrlf = input
     mergeoptions = --no-ff
