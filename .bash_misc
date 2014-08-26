@@ -8,6 +8,7 @@ export PATH="$PATH:$HOME/bin"
 if [ -f ~/.bash_colors ]; then
     . ~/.bash_colors
 fi
+
 # Escaped colors (useful for the command prompt).
 if [ -f ~/.bash_colors.escaped ]; then
     . ~/.bash_colors.escaped
@@ -49,7 +50,6 @@ alias drdug='drd -r /apps/ugc/docroot -l default'
 if [ -f ~/.bash_completion ]; then
     . ~/.bash_completion
 fi
-
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -111,12 +111,12 @@ function _user_type_sign {
 }
 
 function _move_cursor {
-    echo -en "\e[$1;$2H"
+    echo -en "\033[$1;$2H"
     return 0
 }
 
 function _clear_line {
-    echo -en "\e[${COLUMNS}D\e[K"
+    echo -en "\033[${COLUMNS}D\033[K"
     return 0
 }
 
@@ -170,3 +170,4 @@ if [ "$PS1" ]; then
     # or make a base modular and add/remove/replace elements.
     export PS1="$FANCY_PS1"
 fi;
+
