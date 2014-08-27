@@ -17,9 +17,9 @@ if [ -f ~/.bash_colors.escaped ]; then
     . ~/.bash_colors.escaped
 fi
 
-# Allows for prompt color overrides.
-if [ -f ~/.bash_prompt_colors ]; then
-    . ~/.bash_prompt_colors
+# Allows for color overrides.
+if [ -f ~/.bash_colors_override ]; then
+    . ~/.bash_colors_override
 fi
 
 # Some useful aliases.
