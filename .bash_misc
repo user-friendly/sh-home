@@ -17,6 +17,11 @@ if [ -f ~/.bash_colors.escaped ]; then
     . ~/.bash_colors.escaped
 fi
 
+# Allows for prompt color overrides.
+if [ -f ~/.bash_prompt_colors ]; then
+    . ~/.bash_prompt_colors
+fi
+
 # Some useful aliases.
 # demand confirmation for the following
 LS_BASE_OPTIONS='-hx'
