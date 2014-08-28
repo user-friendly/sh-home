@@ -1,0 +1,123 @@
+# 
+# Custom prompt.
+# 
+
+# Use function exists instead?
+if [ -z "$(type -t __git_ps1)" ]; then
+    function __git_ps1 {
+        if [ -d ".git" ]; then
+            local cur_branch=$(git rev-parse --abbrev-ref HEAD)
+            if [ -n "$1" ]; then
+                printf "$1" $cur_branch
+            else
+                printf "%s" $cur_branch
+            fi
+        fi
+    }
+fi
+
+function _fancy_ps1_git_status_bar {
+    local cur_branch="$(__git_ps1)"
+    if [ -z "${cur_branch}" ]; then
+        return 1
+    fi
+    
+    printf "${Color_Off}${IWhite}%s ${BIYellow}%s${Color_Off}" 'branch' $cur_branch
+    return 0
+}
+
+function _user_ps1 {
+    local user_color=$PS1_USER_COLOR
+    if [ "#" == "${USER_TYPE_SIGN}" ]; then
+        user_color=$PS1_SUPERUSER_COLOR
+    fi
+    printf "${Color_Off}%b%s${Color_Off}" $user_color $USER
+}
+
+# Dollar sign for non-root users, hashtag for root.
+function _user_type_sign {
+    if [ "root" == "${USER}" ]; then
+        echo -n '#'
+        return 0
+    else
+        echo -n '$'
+        return 0
+    fi
+}
+
+function _move_cursor {
+    echo -en "\033[$1;$2H"
+    return 0
+}
+
+function _clear_line {
+    echo -en "\033[${COLUMNS}D\033[K"
+    return 0
+}
+
+# What is this function for?
+function _status_bar {
+    if [ -z "${FANCY_PS1_STATUS_BAR}" ]; then
+        return 0
+    fi
+    
+    local git_status="$(_fancy_ps1_git_status_bar)"
+    
+    _move_cursor 1 1
+    _clear_line
+    
+    if [ ! -z "${git_status}" ]; then
+        echo -en "${git_status}"
+        _move_cursor 2 1
+    fi
+    
+    echo -en "${FANCY_PS1_STATUS_BAR}"
+    
+    _move_cursor $LINES 1
+    return 0
+}
+
+function _command_status {
+    ecoh -en "$?"
+}
+
+# Prompt
+# The hash (#) tag is used to signify root users and the dollar sign ($)
+# is used for non-root users. Notice the signifying character at the end
+# of the prompt.
+# Are we an interactive shell?
+if [ "$PS1" ]; then
+    # FIXME Remove at some point. Used for debugging.
+    printf "%s\n" "Using fancy prompt!"
+    
+    if [ "Z$HOSTNAME" = "Z" ]; then
+        HOSTNAME="UNKNOWN-HOST"
+    fi
+    
+    if [ -z "${PS1_HOSTNAME_COLOR}" ]; then
+        PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
+    fi
+    
+    if [ -z "${PS1_USER_COLOR}" ]; then
+        PS1_USER_COLOR="${IWhite}"
+    fi
+    
+    if [ -z "${PS1_SUPERUSER_COLOR}" ]; then
+        PS1_SUPERUSER_COLOR="${Red}"
+    fi
+    
+    if [ -z "${PS1_HOSTNAME}" ]; then
+        PS1_HOSTNAME="${Color_Off}${PS1_HOSTNAME_COLOR}$HOSTNAME${Color_Off}"
+    fi
+    
+    USER_TYPE_SIGN="$(_user_type_sign)"
+    # TODO Not in use? Why?
+    FANCY_PS1_STATUS_BAR="${PS1_USER_COLOR}$USER${Color_Off}@${PS1_HOSTNAME} ${BWhite}$(pwd)${Color_Off}"
+    
+    FANCY_PS1_PREFIX="\$(_fancy_ps1_git_status_bar)\n${E_Yellow}\t${E_Color_Off}"
+    FANCY_PS1_SUFFIX=" "
+    
+    # TODO Detect type of terminal, have multiple prompts for each terminal
+    # or make a base modular and add/remove/replace elements.
+    export PS1="${FANCY_PS1_PREFIX} \$(_user_ps1)@${PS1_HOSTNAME} ${BWhite}\w${Color_Off}\n${USER_TYPE_SIGN}>${FANCY_PS1_SUFFIX}"
+fi;
