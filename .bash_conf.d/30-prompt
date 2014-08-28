@@ -87,9 +87,6 @@ function _command_status {
 # of the prompt.
 # Are we an interactive shell?
 if [ "$PS1" ]; then
-    # FIXME Remove at some point. Used for debugging.
-    printf "%s\n" "Using fancy prompt!"
-    
     if [ "Z$HOSTNAME" = "Z" ]; then
         HOSTNAME="UNKNOWN-HOST"
     fi

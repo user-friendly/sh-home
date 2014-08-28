@@ -1,4 +1,6 @@
-# !/bin/sh
+# 
+# Some custom completion.
+# 
 
 # Define a custom complete function for 'git checkout'.
 ___git_gco ()

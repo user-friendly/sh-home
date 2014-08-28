@@ -1,0 +1,25 @@
+# 
+# Drush aliases.
+#
+
+# Helper functions.
+function drush-debug {
+    export XDEBUG_CONFIG="idekey=PHPSTORM"
+    export SERVER_NAME="pivanov.dev"
+    export SERVER_PORT="9000"
+    drush $*
+    unset XDEBUG_CONFIG
+    unset SERVER_NAME
+    unset SERVER_PORT
+}
+
+alias dr='drush'
+alias drms='drush -r /apps/mags/docroot -l marthastewart.com'
+alias drmw='drush -r /apps/mags/docroot -l marthastewartweddings.com'
+alias drwl='drush -r /apps/mags/docroot -l wholeliving.com'
+alias drug='drush -r /apps/ugc/docroot -l default'
+alias drd='drush-debug'
+alias drdms='drd -r /apps/mags/docroot -l marthastewart.com'
+alias drdmw='drd -r /apps/mags/docroot -l marthastewartweddings.com'
+alias drdwl='drd -r /apps/mags/docroot -l wholeliving.com'
+alias drdug='drd -r /apps/ugc/docroot -l default'
