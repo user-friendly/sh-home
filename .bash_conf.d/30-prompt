@@ -92,11 +92,19 @@ if [ "$PS1" ]; then
     fi
     
     if [ -z "${PS1_HOSTNAME_COLOR}" ]; then
-        PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
+        if [ "$(uname -o)" = "Cygwin" ]; then
+            PS1_HOSTNAME_COLOR="${On_IBlue}${BIWhite}"
+        else
+            PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
+        fi
     fi
     
     if [ -z "${PS1_USER_COLOR}" ]; then
-        PS1_USER_COLOR="${IWhite}"
+        if [ "$(uname -o)" = "Cygwin" ]; then
+            PS1_USER_COLOR="${Red}"
+        else
+            PS1_USER_COLOR="${IWhite}"
+        fi
     fi
     
     if [ -z "${PS1_SUPERUSER_COLOR}" ]; then
