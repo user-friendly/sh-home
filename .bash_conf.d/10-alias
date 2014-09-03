@@ -2,8 +2,16 @@
 # System aliases.
 #
 
+
 LS_BASE_OPTIONS='-hx'
-# TODO Redefined below. Needing this?
+
+if [ -d ~ ] && [ -r ~ ] && [ -x ~ ]; then
+    ls ~ --group-directories-first >& /dev/null
+    if [ "$?" = "0" ]; then
+	LS_BASE_OPTIONS="$LS_BASE_OPTIONS --group-directories-first"
+    fi
+fi
+
 alias ls="ls $LS_BASE_OPTIONS"
 
 # Demand confirmation for most the most common file commands.
