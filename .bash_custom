@@ -5,12 +5,12 @@
 # !!!TODO Learn more about bash strings, variables, strings,
 #         substitutions, patterns, etc.
 
-printf "\nloading custom bash config files...\n\n"
+printf "\n"
 
 export PATH="$PATH:$HOME/bin"
 
 # TODO Not really using this function.
-function function_exists() {
+function function_exists {
     declare -f -F $1;
     return $?;
 }
@@ -25,12 +25,16 @@ if [ ! -d $CONF_DIR ]; then
 fi
 
 # Get all bash config files starting with numeric characters.
-CONF_FILES=$(find -L $CONF_DIR -iname '[[:digit:]]*' -type f -print | sort -n)
+CONF_FILES=$(find -L $CONF_DIR -iname '[[:digit:]]*' -type f -printf '%f\n' | sort -n)
 
 # Include all bash config files in order listed.
-for conf in $CONF_FILES; do
-    if [ -f $conf ]; then
-        printf "loading %s\n" $conf
-        source $conf
+for file in $CONF_FILES; do
+    file=$CONF_DIR/$file
+    if [ -f $file ]; then
+        printf "loading %s\n" $file
+        source $file
     fi
 done
+
+printf "\n"
+
