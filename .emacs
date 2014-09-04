@@ -14,7 +14,9 @@
   "Runs after all init files are loaded."
   (message "Setup linum.")
   (global-linum-mode 1)
+  (global-hl-line-mode t)
   (setq linum-format "%4d ")
+  (setq column-number-mode t)
 ;  (message "Setup color theme.")
 ;  (color-theme-initialize)
 ;  (color-theme-charcoal-black)
@@ -25,9 +27,6 @@
   (global-set-key (kbd "C-x <right>") 'windmove-right)
   (global-set-key (kbd "C-x <up>") 'windmove-up)
   (global-set-key (kbd "C-x <down>") 'windmove-down)
-
-  (global-hl-line-mode t)
 )
 
 (add-hook 'after-init-hook 'global-after-init)
-
