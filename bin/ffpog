@@ -3,7 +3,7 @@
 # Fix file permissions and ownership.
 ########################################################################
 
-OPTIONS=$(getopt -n "$0" -o f:d:o:g:rv --long "file-permissions:,directory-permissions:,owner:,group:,recursive,verbose,dry-run" -- "$@")
+OPTIONS=$(getopt -a -n "$0" -o f:d:o:g:rv -l "file-permissions:,directory-permissions:,owner:,group:,recursive,verbose,dry-run" -- "$@")
 
 FILE_PERM="0644"
 DIR_PERM="0755"
