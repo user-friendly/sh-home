@@ -1,4 +1,5 @@
 #!/bin/sh
+# FIXME Deprecate this deploy script in favour of make.
 
 # NOTE All filename variables are double quoted. Hopefully this will
 #      prevent some problems with whitespce characters in filenames.

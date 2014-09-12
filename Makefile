@@ -9,9 +9,13 @@ BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
 SOURCES=bin bin/ffpog .bash_custom .bash_misc .gitconfig .emacs \
-	.git_commit_template .gitignore_global .tmux.conf
+	.git_commit_template .gitignore_global .tmux.conf 
 
+SOURCES+=.bash_conf.d $(shell find -L .bash_conf.d -iname '[[:digit:]]*' \
+                 -type f 2>/dev/null | sort -n 2>/dev/null)
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
+
+SKIP_CLEAN_DIRS=
 
 $(TARGET_DIR)/%: %
 	@if [ -d $< ]; then \
@@ -32,4 +36,19 @@ all: $(TARGET_SOURCES)
 .PHONY: clean
 
 clean:
-	rm -Rf $(TARGET_SOURCES)
+	@if [ "no" != "$(SKIP_CLEAN_DIRS)" ]; then \
+		echo 'skipping directories'; \
+	fi
+	@for file in $(TARGET_SOURCES); do \
+		if [ ! -d $$file ]; then \
+			echo rm -f $$file; \
+			rm -f $$file; \
+		else \
+			if [ "no" = "$(SKIP_CLEAN_DIRS)" ]; then \
+				echo rm -Rf $$file; \
+				rm -Rf $$file; \
+			else \
+				echo "skip $$file"; \
+			fi \
+		fi \
+	done
