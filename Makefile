@@ -1,6 +1,6 @@
-# 
+#
 # Build & deploy sh-home project.
-# 
+#
 
 .DEFAULT_GOAL=all
 
@@ -9,7 +9,7 @@ BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
 SOURCES=bin bin/ffpog .bash_custom .bash_misc .gitconfig .emacs \
-	.git_commit_template .gitignore_global .tmux.conf 
+	.git_commit_template .gitignore_global .tmux.conf
 
 SOURCES+=.bash_conf.d $(shell find -L .bash_conf.d -iname '[[:digit:]]*' \
                  -type f 2>/dev/null | sort -n 2>/dev/null)
