@@ -23,9 +23,11 @@
   ; Hilight the line where the cursor currently is.
   (global-hl-line-mode t)
 
-;  (message "Setup color theme.")
-;  (color-theme-initialize)
-;  (color-theme-charcoal-black)
+  (message "Setup color theme.")
+  (color-theme-initialize)
+  (color-theme-arjen)
+; (color-theme-cooper-dark)
+; (color-theme-dark-laptop)
 
   (message "Key bindings.")
   (global-set-key (kbd "C-x b") 'buffer-menu)
