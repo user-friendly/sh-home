@@ -17,3 +17,7 @@ Fancy colorful prompt.
 
 Emacs, tmux & git configuration files.
 
+## TODO
+
+Don't load emacs backup files from .bash_conf.d (usually ending in ~).
+Maybe have an ignore list.
