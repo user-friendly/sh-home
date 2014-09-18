@@ -7,14 +7,14 @@ alias dr='drush'
 #
 # Helper drush debug function.
 #
-function drush-debug {
+function drush-debug-start {
     export XDEBUG_CONFIG="idekey=PHPSTORM"
     export SERVER_NAME="pivanov.dev"
     export SERVER_PORT="9000"
-    dr $*
-    unset XDEBUG_CONFIG
+}
+
+function drush-debug-stop {
+	unset XDEBUG_CONFIG
     unset SERVER_NAME
     unset SERVER_PORT
 }
-
-alias drd='drush-debug'
