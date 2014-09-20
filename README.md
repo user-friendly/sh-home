@@ -21,3 +21,5 @@ Emacs, tmux & git configuration files.
 
 Don't load emacs backup files from .bash_conf.d (usually ending in ~).
 Maybe have an ignore list.
+Emacs goodies (all .el scripts in the deb package) need to be installed on
+cygwin in order to use the color themes and such.
