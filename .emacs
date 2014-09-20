@@ -49,7 +49,7 @@
   ;; optional. X will only be included/loaded if there is a GUI.
   ;; T will only be included/loaded if using a Terminal.
   ;; If neither X or T, loads file regardless of interface.
-  ;; (color-theme-arjen)
+  (color-theme-arjen)
   ;; (color-theme-cooper-dark)
   ;; (color-theme-dark-laptop)
 
