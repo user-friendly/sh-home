@@ -10,6 +10,7 @@
 (require 'linum)
 (require 'whitespace)
 (require 'color-theme)
+(require 'erc)
 
 ;; TODO Debian style of loading init el files from .emacs.d.
 
@@ -52,22 +53,37 @@
   (color-theme-arjen)
   ;; (color-theme-cooper-dark)
   ;; (color-theme-dark-laptop)
-
-  (message "Key bindings.")
+  
+  (message "ERC settings.")
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  
+  (message "Global key bindings.")
   (global-set-key (kbd "C-x b") 'buffer-menu)
   (global-set-key (kbd "C-x C-b") 'switch-to-buffer)
   (global-set-key (kbd "C-x <left>") 'windmove-left)
   (global-set-key (kbd "C-x <right>") 'windmove-right)
   (global-set-key (kbd "C-x <up>") 'windmove-up)
   (global-set-key (kbd "C-x <down>") 'windmove-down)
+  (message "ERC key bindings.")
+  ;; Make C-c RET (or C-c C-RET) send messages instead of RET.
+  (define-key erc-mode-map (kbd "RET") nil)
+  (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
+  (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
 )
 
 (add-hook 'after-init-hook 'global-after-init)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
  '(inhibit-startup-screen t)
  '(tab-width 4))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
