@@ -43,7 +43,6 @@
   )
 )
 
-
 (require-and-init 'linum
 				  (lambda ()
 					;; TODO How to get the symbol name of feature?
@@ -56,22 +55,12 @@
 					)
 				  )
 
-
 (require-and-init 'color-theme
-				  (lambda()
-					(print "Init color themes.")
-					(color-theme-initialize)
-					;; TODO Have the color theme be local, in .emacs.d.
-					;; Maybe two different types - NNX-name.el, NNT-name.el
-					;; where NN is a priority number, X|T is either for GUI (X) or Terminal,
-					;; optional. X will only be included/loaded if there is a GUI.
-					;; T will only be included/loaded if using a Terminal.
-					;; If neither X or T, loads file regardless of interface.
-					(color-theme-arjen)
-					;; (color-theme-cooper-dark)
-					;; (color-theme-dark-laptop)
-					)
+				  nil
+				  (lambda (feature)
+					(print "Load color themes."))
 				  )
+(require-and-init 'color-theme_seldefcustom)
 
 (require-and-init 'erc
 				  (lambda ()
@@ -102,7 +91,7 @@
 ;;   )
 ;; (load-user-file "10-color")
 
-;; This init hook will run first.
+;; This init hook will (and should) run first.
 (add-hook 'after-init-hook
 		  (lambda ()
 
