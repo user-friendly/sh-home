@@ -1,4 +1,4 @@
-;; Emacsen independent startup file.  All of the various installed
+v;; Emacsen independent startup file.  All of the various installed
 ;; flavors of emacs (emacs 19, emacs 20, xemacs) will load this file
 ;; at startup.  Make sure any code you put here is emacs flavor
 ;; independent.
@@ -66,11 +66,11 @@
 				  (lambda ()
 					(print "Setup ERC.")
 					(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-					(print "Setup ERC key bindings.")
-					;; Make C-c RET (or C-c C-RET) send messages instead of RET.
-					(define-key erc-mode-map (kbd "RET") nil)
-					(define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
-					(define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
+					;; (print "Setup ERC key bindings.")
+					;; ;; Make C-c RET (or C-c C-RET) send messages instead of RET.
+					;; (define-key erc-mode-map (kbd "RET") nil)
+					;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
+					;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
 					)
 				  )
 
