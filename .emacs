@@ -48,6 +48,8 @@
 					;; TODO How to get the symbol name of feature?
 					;;      Should be "linum".
 					(print "Setup linum.")
+					;; !FIXME Don't enable linum globally.
+					;;        Do it only for certain major modes.
 					(global-linum-mode 1)
 					;; Line number's format.
 					(setq linum-format "%4d ")
