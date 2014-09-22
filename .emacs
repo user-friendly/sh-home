@@ -1,4 +1,4 @@
-v;; Emacsen independent startup file.  All of the various installed
+;; Emacsen independent startup file.  All of the various installed
 ;; flavors of emacs (emacs 19, emacs 20, xemacs) will load this file
 ;; at startup.  Make sure any code you put here is emacs flavor
 ;; independent.
