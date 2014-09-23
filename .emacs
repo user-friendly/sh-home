@@ -78,6 +78,14 @@
 
 (require-and-init 'whitespace)
 
+(require-and-init 'dired
+				  (lambda ()
+					(print "Setup Dired")
+					(setq dired-listing-switches "-lAh --group-directories-first")
+					)
+				  )
+					
+
 ;; TODO Debian style of loading init el files from .emacs.d.
 ;; (defvar user-home-dir
 ;;   (getenv "HOME")
