@@ -63,7 +63,7 @@ proc text_format \D3\w9999\e$f\fforks\w9999\e$F\fmaxforks\D1\w9999\e$l\fload\w99
 proc chart_config 100 100 0 0 0 0 : 0 0 0 0 500 : 0 0 0 1 650
 disk assign_method 2
 disk device Disk 0 0 0 1 1 0 0
-disk chart_config Disk 90 3000000 0 1 0 0 : 0 0 0 0 500 : 0 0 0 1 500
+disk chart_config Disk 65 7000000 0 1 0 0 : 0 0 0 0 500 : 0 0 0 1 500
 disk device sda 0 0 11 0 1 -1 0
 disk chart_config sda 40 2000 0 1 0 0 : 0 0 0 0 500 : 0 0 0 0 500
 disk device sda1 0 0 11 0 1 1 0
@@ -81,7 +81,7 @@ disk text_format \D3\fread\c$r\D1\fwrite\c$w
 inet text_format all \t$a\f $l\N$A\f $L
 inet update_interval all 1
 net enables eth0 1 1 0
-net chart_config eth0 90 700000 0 1 1 0 : 0 0 0 0 500 : 0 0 0 1 500
+net chart_config eth0 90 200000 0 1 1 0 : 0 0 0 0 500 : 0 0 0 1 500
 net enables lo 0 1 0
 net timer_enabled 0
 net timer_seconds 1
