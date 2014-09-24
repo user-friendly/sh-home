@@ -48,12 +48,10 @@
 					;; TODO How to get the symbol name of feature?
 					;;      Should be "linum".
 					(print "Setup linum.")
-					;; !FIXME Don't enable linum globally.
-					;;        Do it only for certain major modes.
-					(global-linum-mode 1)
-					;; Line number's format.
-					(setq linum-format "%4d ")
-					(setq column-number-mode t)
+					(add-hook 'find-file-hook (lambda () 
+												(linum-mode 1)
+												)
+							  )
 					)
 				  )
 
@@ -65,15 +63,14 @@
 (require-and-init 'color-theme_seldefcustom)
 
 (require-and-init 'erc
-				  (lambda ()
-					(print "Setup ERC.")
-					(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-					;; (print "Setup ERC key bindings.")
-					;; ;; Make C-c RET (or C-c C-RET) send messages instead of RET.
-					;; (define-key erc-mode-map (kbd "RET") nil)
-					;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
-					;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
-					)
+				  ;; (lambda ()
+				  ;; 	;; (print "Setup ERC.")
+				  ;; 	;; (print "Setup ERC key bindings.")
+				  ;; 	;; ;; Make C-c RET (or C-c C-RET) send messages instead of RET.
+				  ;; 	;; (define-key erc-mode-map (kbd "RET") nil)
+				  ;; 	;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
+				  ;; 	;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
+				  ;; 	)
 				  )
 
 (require-and-init 'whitespace)
@@ -125,12 +122,15 @@
  ;; If there is more than one, they won't work right.
  '(color-theme-selection "Arjen" nil (color-theme_seldefcustom))
  '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
+ '(erc-hide-list '("JOIN" "PART" "QUIT"))
  '(inhibit-startup-screen t)
- '(tab-width 4))
+ '(tab-width 4)
+ '(linum-format "%4d ")
+ '(column-number-mode t)
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
