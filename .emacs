@@ -121,7 +121,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(color-theme-selection "Arjen" nil (color-theme_seldefcustom))
- '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
+ '(erc-interpret-mirc-color t)
  '(erc-hide-list '("JOIN" "PART" "QUIT"))
  '(inhibit-startup-screen t)
  '(tab-width 4)
