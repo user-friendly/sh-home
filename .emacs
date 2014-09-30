@@ -131,6 +131,7 @@
  '(erc-away-nickname "plamen_afk")
  '(erc-hide-list (quote ("JOIN" "PART" "QUIT")))
  '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
+ '(erc-nick "plamen")
  '(inhibit-startup-screen t)
  '(linum-format "%4d ")
  '(tab-width 4))
