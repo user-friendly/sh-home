@@ -125,7 +125,7 @@
  '(erc-auto-discard-away t)
  '(erc-auto-set-away t)
  '(erc-autoaway-idle-method (quote user))
- '(erc-autoaway-idle-seconds 900)
+ '(erc-autoaway-idle-seconds 1800)
  '(erc-autoaway-message "Not paying attention to IRC...")
  '(erc-autoaway-mode t)
  '(erc-away-nickname "plamen_afk")
