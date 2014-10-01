@@ -136,7 +136,6 @@
  '(erc-join-buffer (quote bury))
  '(erc-nick "plamen")
  '(erc-server-reconnect-timeout 10)
- '(erc-split-line-length 0)
  '(erc-timestamp-format "[%T]")
  '(erc-timestamp-format-right " [%T]")
  '(inhibit-startup-screen t)
