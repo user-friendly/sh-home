@@ -32,6 +32,10 @@ local.properties
 .buildpath
 .cproject
 .ant-targets-*
+.ptp-sync
+.ptp-sync-folder
+.eclipse-deploy.sh
+.eclipse-deploy.log
 
 # Visual Studio #
 #################
