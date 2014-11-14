@@ -34,8 +34,7 @@ local.properties
 .ant-targets-*
 .ptp-sync
 .ptp-sync-folder
-.eclipse-deploy.sh
-.eclipse-deploy.log
+.eclipse-deploy*
 
 # Visual Studio #
 #################
