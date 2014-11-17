@@ -8,7 +8,7 @@
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
-SOURCES=bin bin/ffpog .bash_custom .bash_misc .gitconfig .emacs \
+SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig .emacs \
 	.git_commit_template .gitignore_global .tmux.conf
 
 SOURCES+=.bash_conf.d $(shell find -L .bash_conf.d -iname '[[:digit:]]*' \

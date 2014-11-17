@@ -1,28 +1,10 @@
 #!/bin/sh
 
-OPTIONS=""
-# for opt in $*; do
-    # echo $opt
-    # FILE=$(realpath -ezP $opt 2> /dev/null)
-    # if [ "$?" = "0" ] && [ -f "$FILE" ]; then
-        # opt=$(cygpath -a -w $FILE 2> /dev/null)
-    # fi
-    # echo $opt
-    # OPTIONS="$OPTIONS $opt"
-# done
+if test ! -z "$1"; then
+    file=$(cygpath -wlm "$1")
+    echo "editing: $file"
+else
+    file=''
+fi
 
-while [ -n "$1" ]; do
-    ARG="$1"
-    if [ -a "$ARG" ]; then
-        FILE=$(realpath -ezP "$ARG")
-        if [ "$?" = "0" ] && [ -a "$FILE" ]; then
-            ARG=\'$(cygpath -a -w "$FILE" 2> /dev/null)\'
-        fi
-    fi
-    OPTIONS="$OPTIONS $ARG"
-    shift
-done
-
-echo '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' -nosession -multiInst $OPTIONS
-echo "currently not working"
-# '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' -nosession -multiInst $OPTIONS
+/cygdrive/c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe -multiInst -notabbar "$file"
