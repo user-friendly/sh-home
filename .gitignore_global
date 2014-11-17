@@ -35,6 +35,7 @@ local.properties
 .ptp-sync
 .ptp-sync-folder
 .eclipse-deploy*
+.eclipse-rsync*
 
 # Visual Studio #
 #################
