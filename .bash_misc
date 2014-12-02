@@ -1,2 +1,3 @@
 # !TODO Deprecate this file.
+echo 'TODO DEPRECATE .bash_misc!!!'
 source $HOME/.bash_custom

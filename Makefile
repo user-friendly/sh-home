@@ -11,8 +11,9 @@ TARGET_DIR=$(HOME)
 SOURCES=bin bin/ffpog .bash_custom .bash_misc .gitconfig .emacs \
 	.git_commit_template .gitignore_global .tmux.conf
 
-SOURCES+=.bash_conf.d $(shell find -L .bash_conf.d -iname '[[:digit:]]*' \
-                 -type f 2>/dev/null | sort -n 2>/dev/null)
+SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
+                 -type f -iname '[[:digit:]]*' ! -iname '*~' \
+				 2>/dev/null | sort -n 2>/dev/null)
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
 SKIP_CLEAN_DIRS=
