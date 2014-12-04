@@ -2,9 +2,9 @@
 # Attach to existing tmux session.
 #
 
-if [ "0" = "$(which tmux >&/dev/null; echo $?)" ]\
-   && [ "0" = "$(tmux has >&/dev/null; echo $?)" ]\
-   && [ -z $TMUX ];
+if [ "0" = "$(which tmux >&/dev/null; echo $?)" ] \
+   && [ "0" = "$(tmux has >&/dev/null; echo $?)" ] \
+   && [ -z $TMUX ] && [ -z $TMUX_DONT_ATTACH ];
 then
 	echo
 	read -p "Do you want to attach to the existing tmux session? " _attach_to_tmux
