@@ -18,7 +18,7 @@ TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
 SKIP_CLEAN_DIRS=
 
-include Makefile.*.conf
+# include Makefile.*.conf
 
 $(TARGET_DIR)/%: %
 	@if [ -d $< ]; then \
