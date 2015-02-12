@@ -29,8 +29,23 @@ alias a='ls -A'
 
 alias gs='git status'
 alias gp='git pull'
-alias grp='git reset --hard && gp'
+alias git-reset='git reset --hard'
+alias git-clean='git-reset && git clean -fd'
+alias grp='git-reset && gp'
+alias gcl='git-clean'
+alias gcp='git-clean && gp'
 alias gco='git checkout'
+alias gclo='git-reset-clean-checkout-pull'
+
+# Since sliases don't have arguments, use a function.
+git-reset-clean-checkout-pull ()
+{
+	gcl
+	if [ ! -z $1 ]; then
+		gco $1
+	fi
+	gp
+}
 
 # Enable color support of ls and also add handy aliases.
 if [ -x /usr/bin/dircolors ]; then
