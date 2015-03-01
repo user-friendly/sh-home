@@ -19,8 +19,8 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Display color control chars only.
-alias less='less -R'
+# Display color control chars only and line numbers.
+alias less='less -RN'
 
 alias ll='ls -l'
 alias l='ls -lA'
