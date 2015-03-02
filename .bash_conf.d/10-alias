@@ -36,6 +36,7 @@ alias gcl='git-clean'
 alias gcp='git-clean && gp'
 alias gco='git checkout'
 alias gclo='git-reset-clean-checkout-pull'
+alias gcrt='git-create-branch'
 
 # Since sliases don't have arguments, use a function.
 git-reset-clean-checkout-pull ()
@@ -45,6 +46,24 @@ git-reset-clean-checkout-pull ()
 		gco $1
 	fi
 	gp
+}
+
+git-create-branch() {
+	local base="$1"
+	local branch="$2"
+	local remote="origin"
+	
+	# Clean and checkout base branch.
+	gclo $base
+	# Create branch.
+	git branch $branch
+	# Push branch to remote (in most cases origin).
+	# TODO Require param $2 to include remote name and deduce it.
+	git push $remote $branch
+	# Set upstream for newly created branch.
+	git branch --set-upstream $branch $remote/$branch
+	# Checkout new branch.
+	gco $branch
 }
 
 # Enable color support of ls and also add handy aliases.
