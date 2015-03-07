@@ -81,7 +81,13 @@
 					(setq dired-listing-switches "-lAh --group-directories-first")
 					)
 				  )
-					
+
+(require-and-init 'google-c-style
+				  (lambda ()
+					(add-hook 'c-mode-common-hook 'google-set-c-style)
+					(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+					)
+				  )
 
 ;; TODO Debian style of loading init el files from .emacs.d.
 ;; (defvar user-home-dir

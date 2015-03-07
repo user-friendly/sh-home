@@ -14,6 +14,11 @@ SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig .emacs \
 SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
                  -type f -iname '[[:digit:]]*' ! -iname '*~' \
 				 2>/dev/null | sort -n 2>/dev/null)
+
+SOURCES+=.emacs.d \
+	.emacs.d/elisp \
+	.emacs.d/elisp/google-c-style.el
+
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
 SKIP_CLEAN_DIRS=
