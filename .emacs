@@ -106,11 +106,7 @@
 
 ;; This init hook will (and should) run first.
 (add-hook 'after-init-hook
-		  (lambda ()
-
-			;; Hilight the line where the cursor currently is.
-			(global-hl-line-mode t)
-			
+		  (lambda ()			
 			(print "Global key bindings.")
 			(global-set-key (kbd "C-x b") 'buffer-menu)
 			(global-set-key (kbd "C-x C-b") 'switch-to-buffer)
@@ -122,10 +118,10 @@
 		  )
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(color-theme-selection "Arjen" nil (color-theme_seldefcustom))
  '(column-number-mode t)
  '(erc-auto-discard-away t)
@@ -144,12 +140,14 @@
  '(erc-server-reconnect-timeout 10)
  '(erc-timestamp-format "[%T]")
  '(erc-timestamp-format-right " [%T]")
+ '(global-hl-line-mode t)
+ '(hl-line-sticky-flag t)
  '(inhibit-startup-screen t)
  '(linum-format "%4d ")
  '(tab-width 4))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(hl-line ((t (:inverse-video t)))))
