@@ -60,6 +60,7 @@ enable:
 		tr '\n' ' ' < $(SHELL_STARTUP_FILE) > $(TEMP_SHELL_STARTUP_FILE_APPEND); \
 		DIFF="$$(grep -F -f $(TEMP_SHELL_STARTUP_FILE_APPEND) $(TEMP_SHELL_STARTUP_FILE))"; \
 		if [ -z "$$DIFF" ]; then \
+			echo -n "Not found in shell startup file... "; \
 			if [ ! -f "$(SHELL_STARTUP_FILE_TARGET).back" ]; then \
 				cp "$(SHELL_STARTUP_FILE_TARGET)" "$(SHELL_STARTUP_FILE_TARGET).back"; \
 			fi; \
