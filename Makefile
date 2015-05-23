@@ -4,6 +4,8 @@
 
 .DEFAULT_GOAL=all
 
+.PHONY: all clean uninstall enable
+
 # TODO Check if base dir is target dir. Fail if that is the case.
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
@@ -21,9 +23,8 @@ SOURCES+=.emacs.d \
 
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
-SKIP_CLEAN_DIRS=
-
-# include Makefile.*.conf
+# Whether to skip uninstalling directories or not.
+SKIP_UNINSTALL_DIRS=
 
 $(TARGET_DIR)/%: %
 	@if [ -d $< ]; then \
@@ -39,12 +40,45 @@ $(TARGET_DIR)/%: %
 		cp -f $< $@; \
 	fi
 
-all: $(TARGET_SOURCES)
 
-.PHONY: clean
+all:
+	@echo 'Nothing to make...'
 
 clean:
-	@if [ "no" != "$(SKIP_CLEAN_DIRS)" ]; then \
+	@echo 'Nothing to clean...'
+
+# Append the contents of the following file to the user's .profile file.
+# @todo Find a better way of dealing with the enabling shell code snippet.
+SHELL_STARTUP_FILE=.profile
+SHELL_STARTUP_FILE_TARGET=$(TARGET_DIR)/$(SHELL_STARTUP_FILE)
+TEMP_SHELL_STARTUP_FILE=/tmp/$(SHELL_STARTUP_FILE)
+TEMP_SHELL_STARTUP_FILE_APPEND=/tmp/$(SHELL_STARTUP_FILE).append
+
+enable:
+	@if [ -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
+		tr '\n' ' ' < $(SHELL_STARTUP_FILE_TARGET) > $(TEMP_SHELL_STARTUP_FILE); \
+		tr '\n' ' ' < $(SHELL_STARTUP_FILE) > $(TEMP_SHELL_STARTUP_FILE_APPEND); \
+		DIFF="$$(grep -F -f $(TEMP_SHELL_STARTUP_FILE_APPEND) $(TEMP_SHELL_STARTUP_FILE))"; \
+		if [ -z "$$DIFF" ]; then \
+			if [ ! -f "$(SHELL_STARTUP_FILE_TARGET).back" ]; then \
+				cp "$(SHELL_STARTUP_FILE_TARGET)" "$(SHELL_STARTUP_FILE_TARGET).back"; \
+			fi; \
+			cat $(SHELL_STARTUP_FILE) >> "$(SHELL_STARTUP_FILE_TARGET)"; \
+		fi; \
+		echo "Shell scripts enabled."; \
+		rm -f $(TEMP_SHELL_STARTUP_FILE); \
+		rm -f $(TEMP_SHELL_STARTUP_FILE_APPEND); \
+	else \
+		echo "File $(SHELL_STARTUP_FILE_TARGET) not found - skip enabling scripts."; \
+	fi;
+
+# @todo Implement "disable" target.
+# Would need to remote the shell code snippet.
+
+install: $(TARGET_SOURCES)
+
+uninstall:
+	@if [ "no" != "$(SKIP_UNINSTALL_DIRS)" ]; then \
 		echo 'skipping directories'; \
 	fi
 	@for file in $(TARGET_SOURCES); do \
@@ -52,7 +86,7 @@ clean:
 			echo rm -f $$file; \
 			rm -f $$file; \
 		else \
-			if [ "no" = "$(SKIP_CLEAN_DIRS)" ]; then \
+			if [ "no" = "$(SKIP_UNINSTALL_DIRS)" ]; then \
 				echo rm -Rf $$file; \
 				rm -Rf $$file; \
 			else \
