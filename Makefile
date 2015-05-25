@@ -37,10 +37,11 @@ ENABLE= \
 	echo "$(END_FOOTER)" >> $(SHELL_STARTUP_FILE_TARGET)
 DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_STARTUP_FILE_TARGET)"
 
+# NOTE Introduced with version 3.82. Older distros won't support one shell.
 # Having this special target defined anywhere in the makefile
 # sets all targets' recipes to be executed in one shell.
 # Scripts no longer need to be one line.
-.ONESHELL:
+#.ONESHELL:
 # The above's downside is only the last command's exit status will
 # be captured. With an "-e" flag, the shell should exit if any untested
 # command returns non 0. `man sh` for more details on the this flag.
@@ -52,19 +53,18 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 .PHONY: all clean uninstall enable
 
 $(TARGET_DIR)/%: %
-	@if [ -d $< ]; then
-		if [ ! -d $@ ]; then
-			echo mkdir $@;
-			mkdir $@;
-		else
-			echo touch $@;
-			touch $@;
-		fi
-	else
-		echo cp -f $< $@;
-		cp -f $< $@;
+	@if [ -d "$<" ]; then \
+		if [ ! -d "$@" ]; then \
+			echo mkdir "$@"; \
+			mkdir "$@"; \
+		else \
+			echo touch "$@"; \
+			touch "$@"; \
+		fi; \
+	else \
+		echo cp -f "$<" "$@"; \
+		cp -f "$<" "$@"; \
 	fi
-
 
 all:
 	@echo 'Nothing to make...'
@@ -73,47 +73,47 @@ clean:
 	@echo 'Nothing to clean...'
 
 enable:
-	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then
-		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"
-		return 1
-	fi
-	if [ ! -z "$$($(IS_ENABLED))" ]; then
-		echo "$(ENABLED_MESSAGE)"
-		return 0
-	fi
-	echo -n "Startup snippet not found... "
-	$(ENABLE)
+	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
+		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"; \
+		return 1; \
+	fi; \
+	if [ ! -z "$$($(IS_ENABLED))" ]; then \
+		echo "$(ENABLED_MESSAGE)"; \
+		return 0; \
+	fi; \
+	echo -n "Startup snippet not found... "; \
+	$(ENABLE); \
 	echo "$(ENABLED_MESSAGE)"
 
 disable:
-	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then
-		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"
-		return 1
-	fi
-	if [ -z "$$($(IS_ENABLED))" ]; then
-		echo "$(DISABLED_MESSAGE)"
-		return 0
-	fi
-	echo -n "Startup snippet found... "
-	$(DISABLE)
+	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
+		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"; \
+		return 1; \
+	fi; \
+	if [ -z "$$($(IS_ENABLED))" ]; then \
+		echo "$(DISABLED_MESSAGE)"; \
+		return 0; \
+	fi; \
+	echo -n "Startup snippet found... "; \
+	$(DISABLE); \
 	echo "$(DISABLED_MESSAGE)"
 
 install: $(TARGET_SOURCES)
 
 uninstall:
-	@if [ "no" != "$(SKIP_UNINSTALL_DIRS)" ]; then
-		echo 'skipping directories';
-	fi
-	for file in $(TARGET_SOURCES); do
-		if [ ! -d $$file ]; then
-			echo rm -f $$file;
-			rm -f $$file;
-		else
-			if [ "no" = "$(SKIP_UNINSTALL_DIRS)" ]; then
-				echo rm -Rf $$file;
-				rm -Rf $$file;
-			else
-				echo "skip $$file";
-			fi
-		fi
+	@if [ "no" != "$(SKIP_UNINSTALL_DIRS)" ]; then \
+		echo 'skipping directories'; \
+	fi; \
+	for file in $(TARGET_SOURCES); do \
+		if [ ! -d $$file ]; then \
+			echo rm -f $$file; \
+			rm -f $$file; \
+		else \
+			if [ "no" = "$(SKIP_UNINSTALL_DIRS)" ]; then \
+				echo rm -Rf $$file; \
+				rm -Rf $$file; \
+			else \
+				echo "skip $$file"; \
+			fi; \
+		fi; \
 	done
