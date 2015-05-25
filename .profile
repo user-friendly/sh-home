@@ -1,5 +1,3 @@
-
-# DO NOT MODIFY BELOW THIS LINE
 # Custom shell commands to be appended to the user's .profile file.
 
 # Should be included by most of the currently popular distros.
@@ -11,4 +9,3 @@
 if [ -n "$BASH_VERSION" ] && [ ! -z "$PS1" ] && [ -f "$HOME/.bash_custom" ]; then
     . "$HOME/.bash_custom"
 fi
-# DO NOT MODIFY ABOVE THIS LINE

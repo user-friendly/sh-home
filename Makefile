@@ -2,10 +2,6 @@
 # Build & deploy sh-home project.
 #
 
-.DEFAULT_GOAL=all
-
-.PHONY: all clean uninstall enable
-
 # TODO Check if base dir is target dir. Fail if that is the case.
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
@@ -24,20 +20,49 @@ SOURCES+=.emacs.d \
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
 # Whether to skip uninstalling directories or not.
-SKIP_UNINSTALL_DIRS=
+SKIP_UNINSTALL_DIRS=yes
+
+# Following block of variables relates to including a snippet of code that will
+# essentially enable/disable the helper scripts.
+SHELL_STARTUP_FILE=.profile
+SHELL_STARTUP_FILE_TARGET=$(TARGET_DIR)/$(SHELL_STARTUP_FILE)
+ENABLED_MESSAGE=Shell scripts enabled.
+DISABLED_MESSAGE=Shell scripts disabled.
+START_HEADER := \# DO NOT MODIFY BELOW THIS LINE
+END_FOOTER := \# DO NOT MODIFY ABOVE THIS LINE
+IS_ENABLED=sed --posix -n '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ c\x' "$(SHELL_STARTUP_FILE_TARGET)"
+ENABLE= \
+	echo "$(START_HEADER)" >> $(SHELL_STARTUP_FILE_TARGET); \
+	cat $(SHELL_STARTUP_FILE) >> $(SHELL_STARTUP_FILE_TARGET); \
+	echo "$(END_FOOTER)" >> $(SHELL_STARTUP_FILE_TARGET)
+DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_STARTUP_FILE_TARGET)"
+
+# Having this special target defined anywhere in the makefile
+# sets all targets' recipes to be executed in one shell.
+# Scripts no longer need to be one line.
+.ONESHELL:
+# The above's downside is only the last command's exit status will
+# be captured. With an "-e" flag, the shell should exit if any untested
+# command returns non 0. `man sh` for more details on the this flag.
+# Also, make sure "-c" is in there (this is the default flag).
+.SHELLFLAGS=-e -c
+
+.DEFAULT_GOAL=all
+
+.PHONY: all clean uninstall enable
 
 $(TARGET_DIR)/%: %
-	@if [ -d $< ]; then \
-		if [ ! -d $@ ]; then \
-			echo mkdir $@; \
-			mkdir $@; \
-		else \
-			echo touch $@; \
-			touch $@; \
-		fi \
-	else \
-		echo cp -f $< $@; \
-		cp -f $< $@; \
+	@if [ -d $< ]; then
+		if [ ! -d $@ ]; then
+			echo mkdir $@;
+			mkdir $@;
+		else
+			echo touch $@;
+			touch $@;
+		fi
+	else
+		echo cp -f $< $@;
+		cp -f $< $@;
 	fi
 
 
@@ -47,51 +72,48 @@ all:
 clean:
 	@echo 'Nothing to clean...'
 
-# Append the contents of the following file to the user's .profile file.
-# @todo Find a better way of dealing with the enabling shell code snippet.
-SHELL_STARTUP_FILE=.profile
-SHELL_STARTUP_FILE_TARGET=$(TARGET_DIR)/$(SHELL_STARTUP_FILE)
-TEMP_SHELL_STARTUP_FILE=/tmp/$(SHELL_STARTUP_FILE)
-TEMP_SHELL_STARTUP_FILE_APPEND=/tmp/$(SHELL_STARTUP_FILE).append
-
 enable:
-	@if [ -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
-		tr '\n' ' ' < $(SHELL_STARTUP_FILE_TARGET) > $(TEMP_SHELL_STARTUP_FILE); \
-		tr '\n' ' ' < $(SHELL_STARTUP_FILE) > $(TEMP_SHELL_STARTUP_FILE_APPEND); \
-		DIFF="$$(grep -F -f $(TEMP_SHELL_STARTUP_FILE_APPEND) $(TEMP_SHELL_STARTUP_FILE))"; \
-		if [ -z "$$DIFF" ]; then \
-			echo -n "Not found in shell startup file... "; \
-			if [ ! -f "$(SHELL_STARTUP_FILE_TARGET).back" ]; then \
-				cp "$(SHELL_STARTUP_FILE_TARGET)" "$(SHELL_STARTUP_FILE_TARGET).back"; \
-			fi; \
-			cat $(SHELL_STARTUP_FILE) >> "$(SHELL_STARTUP_FILE_TARGET)"; \
-		fi; \
-		echo "Shell scripts enabled."; \
-		rm -f $(TEMP_SHELL_STARTUP_FILE); \
-		rm -f $(TEMP_SHELL_STARTUP_FILE_APPEND); \
-	else \
-		echo "File $(SHELL_STARTUP_FILE_TARGET) not found - skip enabling scripts."; \
-	fi;
+	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then
+		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"
+		return 1
+	fi
+	if [ ! -z "$$($(IS_ENABLED))" ]; then
+		echo "$(ENABLED_MESSAGE)"
+		return 0
+	fi
+	echo -n "Startup snippet not found... "
+	$(ENABLE)
+	echo "$(ENABLED_MESSAGE)"
 
-# @todo Implement "disable" target.
-# Would need to remote the shell code snippet.
+disable:
+	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then
+		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"
+		return 1
+	fi
+	if [ -z "$$($(IS_ENABLED))" ]; then
+		echo "$(DISABLED_MESSAGE)"
+		return 0
+	fi
+	echo -n "Startup snippet found... "
+	$(DISABLE)
+	echo "$(DISABLED_MESSAGE)"
 
 install: $(TARGET_SOURCES)
 
 uninstall:
-	@if [ "no" != "$(SKIP_UNINSTALL_DIRS)" ]; then \
-		echo 'skipping directories'; \
+	@if [ "no" != "$(SKIP_UNINSTALL_DIRS)" ]; then
+		echo 'skipping directories';
 	fi
-	@for file in $(TARGET_SOURCES); do \
-		if [ ! -d $$file ]; then \
-			echo rm -f $$file; \
-			rm -f $$file; \
-		else \
-			if [ "no" = "$(SKIP_UNINSTALL_DIRS)" ]; then \
-				echo rm -Rf $$file; \
-				rm -Rf $$file; \
-			else \
-				echo "skip $$file"; \
-			fi \
-		fi \
+	for file in $(TARGET_SOURCES); do
+		if [ ! -d $$file ]; then
+			echo rm -f $$file;
+			rm -f $$file;
+		else
+			if [ "no" = "$(SKIP_UNINSTALL_DIRS)" ]; then
+				echo rm -Rf $$file;
+				rm -Rf $$file;
+			else
+				echo "skip $$file";
+			fi
+		fi
 	done
