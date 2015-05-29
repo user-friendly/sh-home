@@ -76,11 +76,11 @@ clean:
 enable:
 	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
 		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"; \
-		return 1; \
+		exit 1; \
 	fi; \
 	if [ ! -z "$$($(IS_ENABLED))" ]; then \
 		echo "$(ENABLED_MESSAGE)"; \
-		return 0; \
+		exit 0; \
 	fi; \
 	echo -n "Startup snippet not found... "; \
 	$(ENABLE); \
@@ -89,11 +89,11 @@ enable:
 disable:
 	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
 		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"; \
-		return 1; \
+		exit 1; \
 	fi; \
 	if [ -z "$$($(IS_ENABLED))" ]; then \
 		echo "$(DISABLED_MESSAGE)"; \
-		return 0; \
+		exit 0; \
 	fi; \
 	echo -n "Startup snippet found... "; \
 	$(DISABLE); \
