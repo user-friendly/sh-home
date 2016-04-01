@@ -44,6 +44,7 @@ git-reset-clean-checkout-pull ()
 	gcp
 	if [ ! -z "$1" ]; then
 		gco $1
+		gp
 	fi
 }
 
