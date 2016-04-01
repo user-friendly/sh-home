@@ -41,11 +41,10 @@ alias gcrt='git-create-branch'
 # Since sliases don't have arguments, use a function.
 git-reset-clean-checkout-pull ()
 {
-	gcl
+	gcp
 	if [ ! -z "$1" ]; then
 		gco $1
 	fi
-	gp
 }
 
 git-create-branch() {
