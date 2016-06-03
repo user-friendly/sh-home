@@ -41,17 +41,31 @@ alias gcrt='git-create-branch'
 # Since sliases don't have arguments, use a function.
 git-reset-clean-checkout-pull ()
 {
-	gcl
-	if [ ! -z $1 ]; then
+	gcp
+	if [ ! -z "$1" ]; then
 		gco $1
+		gp
 	fi
-	gp
 }
 
 git-create-branch() {
 	local base="$1"
 	local branch="$2"
 	local remote="origin"
+	
+	if [ -z "$base" ] && [ -z "$branch" ]; then
+		echo "error: branch name missing"
+		echo "usage: git-create-branch [<base>] <branch-name>"
+		echo "         <base> is optional and will default to HEAD if not supplied"
+		echo "         the base branch will checkout (if supplied), fully cleaned"
+		echo "         and updated with upstream"
+		return 1
+	fi
+
+	if [ -z "$branch" ]; then
+		branch="$base"
+		base=""
+	fi
 	
 	# Clean and checkout base branch.
 	gclo $base

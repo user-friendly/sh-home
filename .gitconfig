@@ -17,3 +17,6 @@
 	ui = true
 [alias]
 	co = checkout
+[push]
+	default = current
+
