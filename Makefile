@@ -7,7 +7,7 @@ BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
 SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig .emacs \
-	.git_commit_template .gitignore_global .tmux.conf
+	.emacs-custom.el .git_commit_template .gitignore_global .tmux.conf
 
 SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
                  -type f -iname '[[:digit:]]*' ! -iname '*~' \
@@ -15,7 +15,10 @@ SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
 
 SOURCES+=.emacs.d \
 	.emacs.d/elisp \
-	.emacs.d/elisp/google-c-style.el
+	.emacs.d/elisp/google-c-style.el \
+	.emacs.d/elisp/nyan-mode.el \
+	.emacs.d/nyan-mode-1.1.1 \
+	.emacs.d/nyan-mode-1.1.1/README.install
 
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
@@ -52,6 +55,11 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 .DEFAULT_GOAL=all
 
 .PHONY: all clean uninstall enable
+
+$(TARGET_DIR)/.emacs.d/nyan-mode-1.1.1:
+	@echo "You'll have to install Nyan Mode manually to: "; \
+	echo "$@"; \
+	mkdir "$@"
 
 $(TARGET_DIR)/%: %
 	@if [ -d "$<" ]; then \

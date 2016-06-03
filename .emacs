@@ -55,32 +55,11 @@
 					)
 				  )
 
-(require-and-init 'color-theme
-				  nil
-				  (lambda (feature)
-					(print "Load color themes."))
-				  )
-(require-and-init 'color-theme_seldefcustom)
-
-(require-and-init 'erc
-				  ;; (lambda ()
-				  ;; 	;; (print "Setup ERC.")
-				  ;; 	;; (print "Setup ERC key bindings.")
-				  ;; 	;; ;; Make C-c RET (or C-c C-RET) send messages instead of RET.
-				  ;; 	;; (define-key erc-mode-map (kbd "RET") nil)
-				  ;; 	;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
-				  ;; 	;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
-				  ;; 	)
-				  )
-
-(require-and-init 'whitespace)
-
-(require-and-init 'dired
-				  (lambda ()
-					(print "Setup Dired")
-					(setq dired-listing-switches "-lAh --group-directories-first")
-					)
-				  )
+(require 'color-theme)
+(require 'color-theme_seldefcustom)
+(require 'erc)
+(require 'whitespace)
+(require 'dired)
 
 (require-and-init 'google-c-style
 				  (lambda ()
@@ -88,6 +67,8 @@
 					(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 					)
 				  )
+
+(require 'nyan-mode)
 
 ;; TODO Debian style of loading init el files from .emacs.d.
 ;; (defvar user-home-dir
@@ -117,37 +98,5 @@
 			)
 		  )
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(color-theme-selection "Arjen" nil (color-theme_seldefcustom))
- '(column-number-mode t)
- '(erc-auto-discard-away t)
- '(erc-auto-set-away t)
- '(erc-autoaway-idle-method (quote user))
- '(erc-autoaway-idle-seconds 1800)
- '(erc-autoaway-message "Not paying attention to IRC...")
- '(erc-autoaway-mode t)
- '(erc-away-nickname nil)
- '(erc-away-timestamp-format "<%T>")
- '(erc-hide-list (quote ("JOIN" "PART" "QUIT")))
- '(erc-insert-timestamp-function (quote erc-insert-timestamp-left-and-right))
- '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
- '(erc-join-buffer (quote bury))
- '(erc-nick "plamen")
- '(erc-server-reconnect-timeout 10)
- '(erc-timestamp-format "[%T]")
- '(erc-timestamp-format-right " [%T]")
- '(global-hl-line-mode t)
- '(hl-line-sticky-flag t)
- '(inhibit-startup-screen t)
- '(linum-format "%4d ")
- '(tab-width 4))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:inverse-video t)))))
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file)
