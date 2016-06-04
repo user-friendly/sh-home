@@ -11,6 +11,24 @@
 
 ;; (add-hook 'after-init-hook 'global-after-init)
 
+;; TODO Debian style of loading init el files from .emacs.d.
+(defvar user-home-dir
+  (getenv "HOME")
+  "User home directory (environment variable $HOME's value)."
+  )
+
+(defun load-user-file (f)
+  "Load a file if it exists and is readable."
+  (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))
+  (if (file-readable-p f-abs)
+	  (load-file f-abs)
+	  (prog2
+		(display-warning "load-user-file" (format "Failed to load file %s" f-abs) :warning)
+		nil
+	  )
+	)
+  )
+
 (defun require-and-init (feature &optional init pre-require post-require)
   "Require a feature and on success, add init to the after-init-hook.
   
@@ -70,31 +88,14 @@
 
 (require 'nyan-mode)
 
-;; TODO Debian style of loading init el files from .emacs.d.
-;; (defvar user-home-dir
-;;   (getenv "HOME")
-;;   "User home directory (environment variable $HOME's value)."
-;; )
-;; (defun load-user-file (f)
-;;   "Load a file if it exists. Fail silently if not."
-;;   (setq f-abs (concat user-home-dir "/.emacs.d/" f ".el"))
-;;   (if (file-exists-p f-abs)
-;; 	  (load-file f-abs)
-;; 	nil
-;; 	)
-;;   )
-;; (load-user-file "10-color")
-
 ;; This init hook will (and should) run first.
 (add-hook 'after-init-hook
 		  (lambda ()			
 			(print "Global key bindings.")
-			(global-set-key (kbd "C-x b") 'buffer-menu)
-			(global-set-key (kbd "C-x C-b") 'switch-to-buffer)
-			(global-set-key (kbd "C-x <left>") 'windmove-left)
-			(global-set-key (kbd "C-x <right>") 'windmove-right)
-			(global-set-key (kbd "C-x <up>") 'windmove-up)
-			(global-set-key (kbd "C-x <down>") 'windmove-down)
+			(global-set-key (kbd "C-c <left>") 'windmove-left)
+			(global-set-key (kbd "C-c <right>") 'windmove-right)
+			(global-set-key (kbd "C-c <up>") 'windmove-up)
+			(global-set-key (kbd "C-c <down>") 'windmove-down)
 			)
 		  )
 
