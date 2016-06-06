@@ -78,6 +78,7 @@
 (require 'erc)
 (require 'whitespace)
 (require 'dired)
+(require 'ido)
 
 (require-and-init 'google-c-style
 				  (lambda ()
@@ -91,7 +92,8 @@
 ;; This init hook will (and should) run first.
 (add-hook 'after-init-hook
 		  (lambda ()			
-			(print "Global key bindings.")
+			(print "Global key bindings.") 
+			(global-set-key (kbd "C-x C-b") 'ibuffer)
 			(global-set-key (kbd "C-c <left>") 'windmove-left)
 			(global-set-key (kbd "C-c <right>") 'windmove-right)
 			(global-set-key (kbd "C-c <up>") 'windmove-up)

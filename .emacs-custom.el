@@ -24,12 +24,13 @@
  '(erc-timestamp-format-right " [%T]")
  '(global-hl-line-mode t)
  '(hl-line-sticky-flag t)
+ '(ido-mode (quote both) nil (ido))
  '(inhibit-startup-screen t)
  '(linum-format "%4d ")
  '(nyan-animate-nyancat t)
  '(nyan-animation-frame-interval 0.5)
- '(nyan-wavy-trail t)
  '(nyan-mode t)
+ '(nyan-wavy-trail t)
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
