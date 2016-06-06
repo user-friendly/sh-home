@@ -7,26 +7,40 @@
 ;; See the policy manual for the proper way to handle Emacs package
 ;; initialization code.
 
-(add-to-list 'load-path "~/.emacs.d/elisp/")
+(add-to-list 'load-path "~/.emacs.d/elisp")
 
 ;; (add-hook 'after-init-hook 'global-after-init)
 
-;; TODO Debian style of loading init el files from .emacs.d.
 (defvar user-home-dir
   (getenv "HOME")
   "User home directory (environment variable $HOME's value)."
   )
 
+;; TODO Is this function needed?
 (defun load-user-file (f)
   "Load a file if it exists and is readable."
   (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))
   (if (file-readable-p f-abs)
-	  (load-file f-abs)
-	  (prog2
+      (load-file f-abs)
+    (prog2
 		(display-warning "load-user-file" (format "Failed to load file %s" f-abs) :warning)
 		nil
-	  )
-	)
+      )
+    )
+  )
+
+(defun load-start-up-files (start-up-dir)
+  "Loads all files from a startup directory that have '.el' extensions."
+  (setq start-up-files (directory-files start-up-dir t ".*\.el"))
+  (dolist (file start-up-files)
+    (if (file-readable-p file)
+		(load-file file)
+      (prog2
+		  (display-warning "load-user-file" (format "Failed to load file %s" file) :warning)
+		  nil
+		)
+      )
+    )
   )
 
 (defun require-and-init (feature &optional init pre-require post-require)
@@ -39,12 +53,12 @@
 
   ;; post-return - helper var for init hook setup
   (let (post-return)
-	(setq post-return t)
-	;; Always fire the pre-require hook.
-	(if (functionp pre-require) (funcall pre-require feature))
-	;; Require with the last arg to t disables errors and
-	;; returns nil on fail, list on success.
-	(if (require feature nil t)
+    (setq post-return t)
+    ;; Always fire the pre-require hook.
+    (if (functionp pre-require) (funcall pre-require feature))
+    ;; Require with the last arg to t disables errors and
+    ;; returns nil on fail, list on success.
+    (if (require feature nil t)
 		(progn
 		  ;; If there is a post hook,
 		  (if (functionp post-require)
@@ -56,10 +70,13 @@
 			)
 		  ;; Feature loaded, return True.
 		  t)
-	  ;; Failed to load feature, return false.
-	  nil)
+      ;; Failed to load feature, return false.
+      nil)
+    )
   )
-)
+
+;; Load all files in the elisp directory.
+(load-start-up-files (format "%s/.emacs.d/elisp" user-home-dir))
 
 (require-and-init 'linum
 				  (lambda ()
