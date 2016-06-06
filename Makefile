@@ -17,8 +17,7 @@ SOURCES+=.emacs.d \
 	.emacs.d/elisp \
 	.emacs.d/elisp/google-c-style.el \
 	.emacs.d/elisp/nyan-mode.el \
-	.emacs.d/nyan-mode-1.1.1 \
-	.emacs.d/nyan-mode-1.1.1/README.install
+	.emacs.d/nyan-mode-1.1.1
 
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
