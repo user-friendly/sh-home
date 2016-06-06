@@ -11,6 +11,8 @@
 
 ;; (add-hook 'after-init-hook 'global-after-init)
 
+;; Define custom variables and functions.
+
 (defvar user-home-dir
   (getenv "HOME")
   "User home directory (environment variable $HOME's value)."
@@ -31,7 +33,7 @@
 
 (defun load-start-up-files (start-up-dir)
   "Loads all files from a startup directory that have '.el' extensions."
-  (setq start-up-files (directory-files start-up-dir t ".*\.el"))
+  (setq start-up-files (directory-files start-up-dir t ".*\.el\\'"))
   (dolist (file start-up-files)
     (if (file-readable-p file)
 		(load-file file)
@@ -90,6 +92,7 @@
 					)
 				  )
 
+;; Add features.
 (require 'color-theme)
 (require 'color-theme_seldefcustom)
 (require 'erc)

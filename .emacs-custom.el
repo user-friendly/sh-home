@@ -24,6 +24,8 @@
  '(erc-timestamp-format-right " [%T]")
  '(global-hl-line-mode t)
  '(hl-line-sticky-flag t)
+ '(ido-enable-flex-matching t)
+ '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
  '(inhibit-startup-screen t)
  '(linum-format "%4d ")
