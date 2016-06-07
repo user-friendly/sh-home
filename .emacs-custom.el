@@ -3,8 +3,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(color-theme-selection "Arjen" nil (color-theme_seldefcustom))
+ '(color-theme-selection "Cooper Dark" nil (color-theme_seldefcustom))
  '(column-number-mode t)
+ '(diff-hl-flydiff-delay 1)
+ '(diff-hl-flydiff-mode nil)
  '(dired-listing-switches "-lAh --group-directories-first")
  '(erc-auto-discard-away t)
  '(erc-auto-set-away t)
@@ -22,8 +24,10 @@
  '(erc-server-reconnect-timeout 10)
  '(erc-timestamp-format "[%T]")
  '(erc-timestamp-format-right " [%T]")
+ '(global-diff-hl-mode t)
  '(global-hl-line-mode t)
  '(hl-line-sticky-flag t)
+ '(ibuffer-use-other-window t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
@@ -39,4 +43,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hl-line ((t (:inverse-video t)))))
+ '(hl-line ((t (:inverse-video t))))
+ '(speedbar-directory-face ((t (:foreground "DeepSkyBlue1")))))

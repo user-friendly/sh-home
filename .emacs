@@ -1,4 +1,4 @@
-;; Emacsen independent startup file.  All of the various installed
+; Emacsen independent startup file.  All of the various installed
 ;; flavors of emacs (emacs 19, emacs 20, xemacs) will load this file
 ;; at startup.  Make sure any code you put here is emacs flavor
 ;; independent.
@@ -7,9 +7,25 @@
 ;; See the policy manual for the proper way to handle Emacs package
 ;; initialization code.
 
-(add-to-list 'load-path "~/.emacs.d/elisp")
+;; Nice color themes:
+;; Cooper Dark
+;; Hober
+;; Linh Dang Dark
+;; Euphoria
+;; Lethe
+;; Midnight
 
-;; (add-hook 'after-init-hook 'global-after-init)
+;; Add and enable MELPA custom package archive.
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/")
+	     )
+(package-initialize)
+
+;; Add your modules path.
+(add-to-list 'load-path "~/.emacs.d/custom/")
+
+
 
 ;; Define custom variables and functions.
 
@@ -106,8 +122,6 @@
 					(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 					)
 				  )
-
-(require 'nyan-mode)
 
 ;; This init hook will (and should) run first.
 (add-hook 'after-init-hook
