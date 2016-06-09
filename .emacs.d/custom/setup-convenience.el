@@ -33,7 +33,16 @@
 									   (filename . ".*.el\\'"))))))
 	  ibuffer-use-other-window t)
 
-;; GROUP: Convenience -> Linum
-(add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GROUP: Convenience -> HL Line ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq global-hl-line-sticky-flag t
+	  ; hl-line ((t (:underline t)))
+	  )
+(global-hl-line-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GROUP: Convenience -> Linum ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
 (setq linum-format "%4d ")

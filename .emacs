@@ -52,7 +52,7 @@
 (require 'workgroups2)
 ;; Change workgroups session file
 (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
-(workgroups-mode 1)
+;; (workgroups-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

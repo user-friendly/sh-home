@@ -3,8 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-hl-flydiff-delay 1)
- '(diff-hl-flydiff-mode nil)
+
  '(erc-auto-discard-away t)
  '(erc-auto-set-away t)
  '(erc-autoaway-idle-method (quote user))
@@ -21,18 +20,17 @@
  '(erc-server-reconnect-timeout 10)
  '(erc-timestamp-format "[%T]")
  '(erc-timestamp-format-right " [%T]")
+
  '(global-diff-hl-mode t)
- '(global-hl-line-mode t)
- '(hl-line-sticky-flag t)
- '(inhibit-startup-screen t)
+ '(diff-hl-flydiff-delay 1)
+ '(diff-hl-flydiff-mode nil)
+
  '(speedbar-show-unknown-files t)
  '(speedbar-smart-directory-expand-flag t)
- '(tab-width 4)
- '(truncate-lines t))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hl-line ((t (:underline t))))
  '(speedbar-directory-face ((t (:foreground "DeepSkyBlue1")))))

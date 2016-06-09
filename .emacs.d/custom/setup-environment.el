@@ -6,6 +6,11 @@
 
 (message "Setup environment group.")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GROUP: Environment -> Display ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq-default truncate-lines t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GROUP: Environment -> Initialization ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16,7 +21,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GROUP: Environment -> Mode Line    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(column-number-mode 1)
+(column-number-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: nyan-mode                    ;;
