@@ -6,6 +6,11 @@
 
 (message "Setup programming group.")
 
+;; Lisp mode settings.
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+			 (show-paren-mode 1)
+			 ))
 
 ;;
 ;; PHP/Web major modes settings.

@@ -9,6 +9,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GROUP: Files -> Dired              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'dired)
 
 (setq
  dired-dwim-target t            ; If another Dired buffer is visibpple in another window, use that directory as target for Rename/Copy.

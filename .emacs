@@ -50,6 +50,8 @@
 ;; GROUP: Convenience -> Workgroups2 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'workgroups2)
+;; Change workgroups session file
+(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
 (workgroups-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,8 +73,6 @@
 ;; Add features.
 (require 'erc)
 (require 'whitespace)
-(require 'dired)
-(require 'ido)
 
 ;; (require-and-init 'google-c-style
 ;; 				  (lambda ()

@@ -7,7 +7,5 @@
 (message "Setup faces and UI group.")
 
 (require 'color-theme)
-(require 'color-theme_seldefcustom)
-(setq
- color-theme-selection "Cooper Dark" nil (color-theme_seldefcustom)
- )
+(color-theme-initialize)
+(color-theme-install (color-theme-jsc-dark))
