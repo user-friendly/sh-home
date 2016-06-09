@@ -2,6 +2,8 @@
 ;; Custom functions.
 ;;
 
+(provide 'user-utility)
+
 (defvar user-home-dir
   (getenv "HOME")
   "User home directory (environment variable $HOME's value)."
@@ -65,3 +67,4 @@
       nil)
     )
   )
+

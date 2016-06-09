@@ -1,4 +1,4 @@
-; Emacsen independent startup file.  All of the various installed
+;; Emacsen independent startup file.  All of the various installed
 ;; flavors of emacs (emacs 19, emacs 20, xemacs) will load this file
 ;; at startup.  Make sure any code you put here is emacs flavor
 ;; independent.
@@ -25,27 +25,36 @@
 ;; Add your modules path.
 (add-to-list 'load-path "~/.emacs.d/custom/")
 
+;; Load user modules.
+(require 'user-utility)
+
 ;; Load setup modules.
 (require 'setup-applications)
 (require 'setup-communication)
 (require 'setup-convenience)
 (require 'setup-data)
 (require 'setup-development)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
-(require 'setup-)
+(require 'setup-editing)
+(require 'setup-environment)
+(require 'setup-external)
+(require 'setup-faces-and-ui)
+(require 'setup-files)
+(require 'setup-help)
+(require 'setup-programming)
+(require 'setup-text)
+(require 'setup-local)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: workgroups2              ;;
+;;                                   ;;
+;; GROUP: Convenience -> Workgroups2 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'workgroups2)
+(workgroups-mode 1)
 
-;; (mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (MAPC 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
 
 ;; (require-and-init 'linum
 ;; 				  (lambda ()
@@ -60,8 +69,6 @@
 ;; 				  )
 
 ;; Add features.
-(require 'color-theme)
-(require 'color-theme_seldefcustom)
 (require 'erc)
 (require 'whitespace)
 (require 'dired)
@@ -85,8 +92,4 @@
 ;; 			(global-set-key (kbd "C-c <down>") 'windmove-down)
 ;; 			)
 ;; 		  )
-
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file)
-
 

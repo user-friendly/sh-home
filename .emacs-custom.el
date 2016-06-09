@@ -3,7 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(color-theme-selection "Cooper Dark" nil (color-theme_seldefcustom))
  '(column-number-mode t)
  '(diff-hl-flydiff-delay 1)
  '(diff-hl-flydiff-mode nil)
@@ -27,6 +26,8 @@
  '(global-diff-hl-mode t)
  '(global-hl-line-mode t)
  '(hl-line-sticky-flag t)
+ '(ibuffer-saved-filter-groups nil)
+ '(ibuffer-saved-filters nil)
  '(ibuffer-use-other-window t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -37,11 +38,14 @@
  '(nyan-animation-frame-interval 0.5)
  '(nyan-mode t)
  '(nyan-wavy-trail t)
- '(tab-width 4))
+ '(speedbar-show-unknown-files t)
+ '(speedbar-smart-directory-expand-flag t)
+ '(tab-width 4)
+ '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hl-line ((t (:inverse-video t))))
+ '(hl-line ((t (:underline t))))
  '(speedbar-directory-face ((t (:foreground "DeepSkyBlue1")))))

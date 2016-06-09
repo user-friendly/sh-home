@@ -6,18 +6,21 @@
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
-SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig .emacs \
-	.emacs-custom.el .git_commit_template .gitignore_global .tmux.conf
+SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig \
+	.git_commit_template .gitignore_global .tmux.conf
 
 SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
                  -type f -iname '[[:digit:]]*' ! -iname '*~' \
 				 2>/dev/null | sort -n 2>/dev/null)
 
-SOURCES+=.emacs.d \
-	.emacs.d/elisp \
-	.emacs.d/elisp/google-c-style.el \
-	.emacs.d/elisp/nyan-mode.el \
+SOURCES+=.emacs \
+	.emacs.d \
+	.emacs.d/custom \
 	.emacs.d/nyan-mode-1.1.1
+
+SOURCES+=$(shell find -P .emacs.d/custom  \
+                 -type f -iname '*.el' ! -iname '*~' \
+				 2>/dev/null | sort -n 2>/dev/null)
 
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 

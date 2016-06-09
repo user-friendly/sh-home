@@ -17,6 +17,12 @@ Fancy colorful prompt.
 
 Emacs, tmux & git configuration files.
 
+## Emacs
+
+Configuration structure is almost entirely based on Tu Do's Emacs tutorials.
+Visit http://tuhdo.github.io/ (https://github.com/tuhdo/tuhdo.github.io,
+https://github.com/tuhdo) for more information.
+
 ## TODO
 
 Don't load emacs backup files from .bash_conf.d (usually ending in ~).

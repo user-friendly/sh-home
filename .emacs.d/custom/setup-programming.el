@@ -1,4 +1,13 @@
 ;;
+;; Setup programming group.
+;;
+
+(provide 'setup-programming)
+
+(message "Setup programming group.")
+
+
+;;
 ;; PHP/Web major modes settings.
 ;;
 
