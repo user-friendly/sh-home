@@ -9,7 +9,11 @@
 ;; Lisp mode settings.
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
-			 (show-paren-mode 1)
+             (show-paren-mode t)
+             (electric-pair-mode t)
+             (setq electric-pair-preserve-balance t
+                   electric-pair-delete-adjacent-pairs t
+                   electric-pair-open-newline-between-pairs t)
 			 ))
 
 ;;
