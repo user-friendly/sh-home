@@ -16,23 +16,23 @@
     )
   )
 
-;; (defvar user-home-dir
-;;   (getenv "HOME")
-;;   "User home directory (environment variable $HOME's value)."
-;;   )
+(defvar user-home-dir
+  (getenv "HOME")
+  "User home directory (environment variable $HOME's value)."
+  )
 
-;; ;; TODO Is this function needed?
-;; (defun load-user-file (f)
-;;   "Load a file if it exists and is readable."
-;;   (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))
-;;   (if (file-readable-p f-abs)
-;;       (load-file f-abs)
-;;     (prog2
-;; 		(display-warning "load-user-file" (format "Failed to load file %s" f-abs) :warning)
-;; 		nil
-;;       )
-;;     )
-;;   )
+;; TODO Is this function needed?
+(defun load-user-file (f)
+  "Load a file if it exists and is readable."
+  (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))
+  (if (file-readable-p f-abs)
+      (load-file f-abs)
+    (prog2
+		(display-warning "load-user-file" (format "Failed to load file %s" f-abs) :warning)
+		nil
+      )
+    )
+  )
 
 ;; (defun load-start-up-files (start-up-dir)
 ;;   "Loads all files from a startup directory that have '.el' extensions."
