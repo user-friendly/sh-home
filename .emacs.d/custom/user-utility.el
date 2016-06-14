@@ -16,12 +16,18 @@
     )
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TODO Get rid of the rest of these functions. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar user-home-dir
   (getenv "HOME")
   "User home directory (environment variable $HOME's value)."
   )
 
-;; TODO Is this function needed?
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TODO Is this function needed? - Yes it is. It's used to load the ;;
+;; Nyan package in a custom way.                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun load-user-file (f)
   "Load a file if it exists and is readable."
   (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))

@@ -56,7 +56,7 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 
 .DEFAULT_GOAL=all
 
-.PHONY: all clean uninstall enable
+.PHONY: all clean uninstall enable test
 
 $(TARGET_DIR)/.emacs.d/nyan-mode-1.1.1:
 	@echo "You'll have to install Nyan Mode manually to: "; \
@@ -128,3 +128,6 @@ uninstall:
 			fi; \
 		fi; \
 	done
+
+test:
+	make install && emacs24-x -mm -T "Test Instance" --debug-init &
