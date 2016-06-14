@@ -4,41 +4,38 @@
 
 (provide 'user-utility)
 
-(defun user-dired-find-file-marked ()
+(defun user-dired-find-file-marked () 
   (interactive)
-  "In Dired, visit all marked files."
-  (setq files (dired-get-marked-files))
-  (dolist (filename files)
-    (if (and filename (file-readable-p filename))
-        (find-file-noselect filename)
-      (warn "File %s not found." filename)
-      )
-    )
-  )
+  "In Dired, visit all marked files." 
+  (setq files (dired-get-marked-files)) 
+  (dolist (filename files) 
+    (if (and filename 
+             (file-readable-p filename)) 
+        (find-file-noselect filename) 
+      (warn 
+       "File %s not found."
+       filename))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TODO Get rid of the rest of these functions. ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar user-home-dir
-  (getenv "HOME")
-  "User home directory (environment variable $HOME's value)."
-  )
+(defvar user-home-dir (getenv "HOME") 
+  "User home directory (environment variable $HOME's value).")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TODO Is this function needed? - Yes it is. It's used to load the ;;
 ;; Nyan package in a custom way.                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun load-user-file (f)
-  "Load a file if it exists and is readable."
-  (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f))
-  (if (file-readable-p f-abs)
-      (load-file f-abs)
-    (prog2
-		(display-warning "load-user-file" (format "Failed to load file %s" f-abs) :warning)
-		nil
-      )
-    )
-  )
+(defun load-user-file (f) 
+  "Load a file if it exists and is readable." 
+  (setq f-abs (format "%s/.emacs.d/%s.el" user-home-dir f)) 
+  (if (file-readable-p f-abs) 
+      (load-file f-abs) 
+    (prog2 
+        (display-warning "load-user-file" (format "Failed to load file %s"
+                                                  f-abs) 
+                         :warning)
+        nil)))
 
 ;; (defun load-start-up-files (start-up-dir)
 ;;   "Loads all files from a startup directory that have '.el' extensions."
@@ -56,7 +53,7 @@
 
 ;; (defun require-and-init (feature &optional init pre-require post-require)
 ;;   "Require a feature and on success, add init to the after-init-hook.
-  
+
 ;;   Pre-require is a func and is always executed before require is called.
 ;;   Post-require is called before adding the init hook. If post-require
 ;;   is supplied and returns nil, the init hook will not be added to

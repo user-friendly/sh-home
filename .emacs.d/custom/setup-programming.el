@@ -7,14 +7,13 @@
 (message "Setup programming group.")
 
 ;; Lisp mode settings.
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
-             (show-paren-mode t)
-             (electric-pair-mode t)
+(add-hook 'emacs-lisp-mode-hook 
+          '(lambda () 
+             (show-paren-mode t) 
+             (electric-pair-mode t) 
              (setq electric-pair-preserve-balance t
                    electric-pair-delete-adjacent-pairs t
-                   electric-pair-open-newline-between-pairs t)
-			 ))
+                   electric-pair-open-newline-between-pairs t)))
 
 ;;
 ;; PHP/Web major modes settings.
@@ -29,6 +28,33 @@
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: diff-hl                             ;;
+;;                                              ;;
+;; GROUP: Programming -> Tools -> Vc -> Diff Hl ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-diff-hl-mode)
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: elisp-format                       ;;
+;;                                             ;;
+;; GROUP: Programming -> Tools -> Elisp Format ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq elisp-format-column 78)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: flyckeck                       ;;
+;;                                         ;;
+;; GROUP: Programming -> Tools -> Flyckeck ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'flycheck)
+(setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+      flycheck-idle-change-delay 2)
+(set-default 'flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+;; Enable flycheck-mode only for programming modes.
+(add-hook 'prog-mode-hook 'flycheck-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: magit                       ;;
 ;;                                      ;;
@@ -39,7 +65,7 @@
 (add-hook 'magit-mode-hook 'magit-load-config-extensions)
 
 ;; full screen magit-status
-(defadvice magit-status (around magit-fullscreen activate)
+(defadvice magit-status (around magit-fullscreen activate) 
   (window-configuration-to-register :magit-fullscreen)
   ad-do-it
   (delete-other-windows))
@@ -53,4 +79,3 @@
 (global-set-key (kbd "C-x g s") 'magit-status)
 (global-set-key (kbd "C-x g r") 'magit-reflog)
 (global-set-key (kbd "C-x g t") 'magit-tag)
-

@@ -14,31 +14,30 @@
 ;; GROUP: Convenience -> Ibuffer
 (require 'ibuffer)
 
-(defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
-(defalias 'list-buffers 'ibuffer) ; always use ibuffer
+(defalias 'yes-or-no-p 'y-or-n-p)       ; y or n is enough
+(defalias 'list-buffers 'ibuffer)       ; always use ibuffer
 
-(setq ibuffer-saved-filter-groups (quote
-								   (("Default"
-									 ("Customization"
-									  (used-mode . Custom-mode))
-									 ("Dired"
-									  (used-mode . dired-mode))
-									 ("Help/Info"
-									  (or
-									   (used-mode . help-mode)
-									   (used-mode . Info-mode)))
-									 ("Lisp"
-									  (or
-									   (filename . ".*\\.emacs\\'")
-									   (filename . ".*.el\\'"))))))
-	  ibuffer-use-other-window t)
+(setq ibuffer-saved-filter-groups (quote (("Default" ("Customization"
+                                                      (used-mode .
+                                                                 Custom-mode)) 
+                                           ("Dired" (used-mode . dired-mode)) 
+                                           ("Help/Info" (or (used-mode .
+                                                                       help-mode) 
+                                                            (used-mode .
+                                                                       Info-mode))) 
+                                           ("Lisp" (or (filename .
+                                                                 ".*\\.emacs\\'") 
+                                                       (filename . ".*.el\\'"))))))
+      ibuffer-use-other-window t)
+
+(add-hook 'ibuffer-mode-hook 
+          (lambda () 
+            (ibuffer-switch-to-saved-filter-groups "Default")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GROUP: Convenience -> HL Line ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq global-hl-line-sticky-flag t
-	  ; hl-line ((t (:underline t)))
-	  )
+(setq global-hl-line-sticky-flag t)
 (global-hl-line-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -46,3 +45,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
 (setq linum-format "%4d ")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: company              ;;
+;;                               ;;
+;; GROUP: Convenience -> Company ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'after-init-hook 'global-company-mode)
