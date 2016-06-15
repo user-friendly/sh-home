@@ -22,6 +22,7 @@
             (color-theme-install (color-theme-jsc-dark))) 
           (when (not (window-system)) ; On terminals, the default highlighting face is not legible.
             (set-face-attribute 'hl-line t 
-                                :inherit nil 
+                                :inherit nil
+                                :weight 'bold
                                 :underline '(:color foreground-color 
                                                     :style line))))
