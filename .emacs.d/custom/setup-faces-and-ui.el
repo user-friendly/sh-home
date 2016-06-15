@@ -15,6 +15,13 @@
 (if (fboundp 'menu-bar-mode) 
     (menu-bar-mode -1))
 
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-install (color-theme-jsc-dark))
+(add-hook 'after-init-hook 
+          (lambda () 
+            (require 'color-theme) 
+            (color-theme-initialize) 
+            (color-theme-install (color-theme-jsc-dark))) 
+          (when (not (window-system)) ; On terminals, the default highlighting face is not legible.
+            (set-face-attribute 'hl-line t 
+                                :inherit nil 
+                                :underline '(:color foreground-color 
+                                                    :style line))))
