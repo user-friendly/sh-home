@@ -17,9 +17,7 @@
 
 ;; Add and enable MELPA custom package archive.
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-	     )
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;; Add your modules path.
@@ -56,22 +54,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (MAPC 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
-
-;; (require-and-init 'linum
-;; 				  (lambda ()
-;; 					;; TODO How to get the symbol name of feature?
-;; 					;;      Should be "linum".
-;; 					(print "Setup linum.")
-;; 					(add-hook 'find-file-hook (lambda () 
-;; 												(linum-mode 1)
-;; 												)
-;; 							  )
-;; 					)
-;; 				  )
+;; (mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
 
 ;; Add features.
-(require 'erc)
 (require 'whitespace)
 
 ;; (require-and-init 'google-c-style
@@ -81,15 +66,11 @@
 ;; 					)
 ;; 				  )
 
-;; This init hook will (and should) run first.
-;; (add-hook 'after-init-hook
-;; 		  (lambda ()			
-;; 			(print "Global key bindings.") 
-;; 			(global-set-key (kbd "C-x C-b") 'ibuffer)
-;; 			(global-set-key (kbd "C-c <left>") 'windmove-left)
-;; 			(global-set-key (kbd "C-c <right>") 'windmove-right)
-;; 			(global-set-key (kbd "C-c <up>") 'windmove-up)
-;; 			(global-set-key (kbd "C-c <down>") 'windmove-down)
-;; 			)
-;; 		  )
-
+This init hook will (and should) run first.
+(add-hook 'after-init-hook 
+          (lambda () 
+            (print "Global key bindings.") 
+            (global-set-key (kbd "C-c <left>") 'windmove-left) 
+            (global-set-key (kbd "C-c <right>") 'windmove-right) 
+            (global-set-key (kbd "C-c <up>") 'windmove-up) 
+            (global-set-key (kbd "C-c <down>") 'windmove-down)))
