@@ -66,7 +66,7 @@
 ;; 					)
 ;; 				  )
 
-This init hook will (and should) run first.
+;; This init hook will (and should) run first.
 (add-hook 'after-init-hook 
           (lambda () 
             (print "Global key bindings.") 
