@@ -1,6 +1,6 @@
-;;
-;; Setup convenience group.
-;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setup convenience group. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'setup-convenience)
 
@@ -59,3 +59,10 @@
 ;; GROUP: Convenience -> Company ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (add-hook 'after-init-hook 'global-company-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGES: projectile             ;;
+;;                                  ;;
+;; GROUP: Convenience -> Projectile ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(projectile-global-mode)

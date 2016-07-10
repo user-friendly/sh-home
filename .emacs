@@ -15,13 +15,11 @@
 ;; Lethe
 ;; Midnight
 
-;; Add and enable MELPA custom package archive.
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-
 ;; Add your modules path.
 (add-to-list 'load-path "~/.emacs.d/custom/")
+
+;; Install required packages.
+(require 'setup-packages)
 
 ;; Load user modules.
 (require 'user-utility)
@@ -41,6 +39,7 @@
 (require 'setup-programming)
 (require 'setup-text)
 (require 'setup-local)
+(require 'setup-helm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: workgroups2              ;;
