@@ -26,7 +26,6 @@
 ;;                                       ;;
 ;; GROUOP: Environment -> Frames -> Nyan ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (setq nyan-animate-nyancat t nyan-animation-frame-interval 0.5 nyan-wavy-trail
       t)
 (if (load-user-file "nyan-mode-1.1.1/nyan-mode") 

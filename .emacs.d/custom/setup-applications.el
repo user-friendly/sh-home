@@ -30,3 +30,10 @@
  erc-timestamp-format "[%T]"
  erc-timestamp-format-right " [%T]"
  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: Calendar               ;;
+;;                                 ;;
+;; GROUP: Applications -> Calendar ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(appt-activate t)
