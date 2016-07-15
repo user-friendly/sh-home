@@ -17,8 +17,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)       ; y or n is enough
 (defalias 'list-buffers 'ibuffer)       ; always use ibuffer
 
-(setq ibuffer-saved-filter-groups (quote (("Default" ("ERC" (used-mode .
-                                                                       erc-mode)) 
+(setq ibuffer-saved-filter-groups (quote (("Default" ("Helm" (used-mode .
+                                                                        helm-major-mode)) 
+                                           ("ERC" (used-mode . erc-mode)) 
                                            ("Text" (or (used-mode .
                                                                   fundamental-mode) 
                                                        (used-mode . org-mode) 
@@ -33,7 +34,8 @@
                                                                        Info-mode))) 
                                            ("Lisp" (or (filename .
                                                                  ".*\\.emacs\\'") 
-                                                       (filename . ".*.el\\'"))) 
+                                                       (filename .
+                                                                 ".*\\.el\\'"))) 
                                            ("PHP" (used-mode . php-mode)))))
       ibuffer-use-other-window t)
 
@@ -66,3 +68,14 @@
 ;; GROUP: Convenience -> Projectile ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (projectile-global-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: None.             ;;
+;;                            ;;
+;; GROUP: Convenience.        ;;
+;;                            ;;
+;; I consider it convenience. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'narrow-to-region 'disabled nil)
