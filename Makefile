@@ -2,6 +2,9 @@
 # Build & deploy sh-home project.
 #
 
+# FIXME Starting Tmux v2.2, the utf8 option has been removed.
+# It will be deduced automatically.
+
 # TODO Check if base dir is target dir. Fail if that is the case.
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
