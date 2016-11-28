@@ -52,7 +52,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GROUP: Convenience -> Linum ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
+;; (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
+(global-linum-mode t)
 (setq linum-format "%4d ")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
