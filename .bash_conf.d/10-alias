@@ -27,6 +27,9 @@ alias l='ls -lA'
 alias aa='ls'
 alias a='ls -A'
 
+alias df='df --si'
+alias dz='du --si --max-depth=0'
+
 alias gs='git status'
 alias gp='git pull'
 alias git-reset='git reset --hard'
