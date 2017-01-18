@@ -3,7 +3,7 @@
     filemode = false
     bare = false
     logallrefupdates = true
-    symlinks = false
+    symlinks = true
     ignorecase = true
     hideDotFiles = dotGitOnly
     editor = editor
