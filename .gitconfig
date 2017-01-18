@@ -1,15 +1,19 @@
 [core]
-    repositoryformatversion = 0
-    filemode = false
-    bare = false
-    logallrefupdates = true
+# @TODO What does this option do?
+#    repositoryformatversion = 0
+# Automatically guessed by git-clone & git-init.
+#    bare = false
+# Logs updates to refs. On by default.
+#    logallrefupdates = true
+# Restore symlinks on checkout.
     symlinks = true
-    ignorecase = true
     hideDotFiles = dotGitOnly
     editor = editor
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global    
     autocrlf = input
-    mergeoptions = --no-ff
+# The following options are useful for FAT like filesystems.
+#    filemode = false
+#    ignorecase = true
     
 [commit]
     template = ~/.git_commit_template
