@@ -42,7 +42,7 @@
 ;; - Commit by C-c C-c, abort by C-c C-k
 (require 'wdired)
 (setq wdired-allow-to-change-permissions t ; allow to edit permission bits
-      wdired-allow-to-redirect-links       ; allow to edit symlinks
+      wdired-allow-to-redirect-links     t ; allow to edit symlinks
       )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
