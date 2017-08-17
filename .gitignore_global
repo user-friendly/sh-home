@@ -39,9 +39,10 @@ local.properties
 
 # Visual Studio #
 #################
-*.vcxproj
+# These seem to be important.
+#*.vcxproj
+#*.vcproj
 *.vcxproj.*
-*.vcproj
 *.vcproj.*
 
 # Emacs #
