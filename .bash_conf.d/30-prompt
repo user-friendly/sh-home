@@ -81,48 +81,56 @@ function _command_status {
     ecoh -en "$?"
 }
 
-# Prompt
-# The hash (#) tag is used to signify root users and the dollar sign ($)
-# is used for non-root users. Notice the signifying character at the end
-# of the prompt.
-# Are we an interactive shell?
-if [ "$PS1" ]; then
-    if [ "Z$HOSTNAME" = "Z" ]; then
-        HOSTNAME="UNKNOWN-HOST"
-    fi
-    
-    if [ -z "${PS1_HOSTNAME_COLOR}" ]; then
-        if [ "$(uname -o)" = "Cygwin" ]; then
-            PS1_HOSTNAME_COLOR="${On_IBlue}${BIWhite}"
+function _update_ps1 {
+    # Prompt
+    # The hash (#) tag is used to signify root users and the dollar sign ($)
+    # is used for non-root users. Notice the signifying character at the end
+    # of the prompt.
+    # Are we an interactive shell?
+    if [ "$PS1" ]; then
+        if [ "Z$PS1_HOSTNAME_OVERRIDE" = "Z" ]; then
+            if [ "Z$HOSTNAME" = "Z" ]; then
+                PS1_HOSTNAME_USE="UNKNOWN-HOST"
+            else
+                PS1_HOSTNAME_USE="$HOSTNAME"
+            fi
         else
-            PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
+            PS1_HOSTNAME_USE="$PS1_HOSTNAME_OVERRIDE"
         fi
-    fi
-    
-    if [ -z "${PS1_USER_COLOR}" ]; then
-        if [ "$(uname -o)" = "Cygwin" ]; then
-            PS1_USER_COLOR="${Red}"
-        else
-            PS1_USER_COLOR="${IWhite}"
+
+        if [ -z "${PS1_HOSTNAME_COLOR}" ]; then
+            if [ "$(uname -o)" = "Cygwin" ]; then
+                PS1_HOSTNAME_COLOR="${On_IBlue}${BIWhite}"
+            else
+                PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
+            fi
         fi
-    fi
-    
-    if [ -z "${PS1_SUPERUSER_COLOR}" ]; then
-        PS1_SUPERUSER_COLOR="${Red}"
-    fi
-    
-    if [ -z "${PS1_HOSTNAME}" ]; then
-        PS1_HOSTNAME="${Color_Off}${PS1_HOSTNAME_COLOR}$HOSTNAME${Color_Off}"
-    fi
-    
-    USER_TYPE_SIGN="$(_user_type_sign)"
-    # TODO Not in use? Why?
-    FANCY_PS1_STATUS_BAR="${PS1_USER_COLOR}$USER${Color_Off}@${PS1_HOSTNAME} ${BWhite}$(pwd)${Color_Off}"
-    
-    FANCY_PS1_PREFIX="\$(_fancy_ps1_git_status_bar)\n${E_Yellow}\t${E_Color_Off}"
-    FANCY_PS1_SUFFIX=" "
-    
-    # TODO Detect type of terminal, have multiple prompts for each terminal
-    # or make a base modular and add/remove/replace elements.
-    export PS1="${FANCY_PS1_PREFIX} \$(_user_ps1)@${PS1_HOSTNAME} ${BWhite}\w${Color_Off}\n${USER_TYPE_SIGN}>${FANCY_PS1_SUFFIX}"
-fi;
+        
+        PS1_HOSTNAME="${Color_Off}${PS1_HOSTNAME_COLOR}$PS1_HOSTNAME_USE${Color_Off}"
+        
+        if [ -z "${PS1_USER_COLOR}" ]; then
+            if [ "$(uname -o)" = "Cygwin" ]; then
+                PS1_USER_COLOR="${Red}"
+            else
+                PS1_USER_COLOR="${IWhite}"
+            fi
+        fi
+        
+        if [ -z "${PS1_SUPERUSER_COLOR}" ]; then
+            PS1_SUPERUSER_COLOR="${Red}"
+        fi        
+        
+        USER_TYPE_SIGN="$(_user_type_sign)"
+        # TODO Not used. It had something to do with substitution.
+        FANCY_PS1_STATUS_BAR="${PS1_USER_COLOR}$USER${Color_Off}@${PS1_HOSTNAME} ${BWhite}$(pwd)${Color_Off}"
+        
+        FANCY_PS1_PREFIX="\$(_fancy_ps1_git_status_bar)\n${E_Yellow}\t${E_Color_Off}"
+        FANCY_PS1_SUFFIX=" "
+        
+        # TODO Detect type of terminal, have multiple prompts for each terminal
+        # or make a base modular and add/remove/replace elements.
+        export PS1="${FANCY_PS1_PREFIX} \$(_user_ps1)@${PS1_HOSTNAME} ${BWhite}\w${Color_Off}\n${USER_TYPE_SIGN}>${FANCY_PS1_SUFFIX}"
+    fi;
+}
+
+_update_ps1
