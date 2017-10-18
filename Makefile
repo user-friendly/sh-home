@@ -9,8 +9,8 @@
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
-SOURCES=bin bin/ffpog bin/notepad++ .bash_custom .bash_misc .gitconfig \
-	.git_commit_template .gitignore_global .tmux.conf
+SOURCES=bin .bash_custom .bash_misc .gitconfig \
+	.git_commit_template .gitignore_global
 
 SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
                  -type f -iname '[[:digit:]]*' ! -iname '*~' \
@@ -18,8 +18,7 @@ SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
 
 SOURCES+=.emacs \
 	.emacs.d \
-	.emacs.d/custom \
-	.emacs.d/nyan-mode-1.1.1
+	.emacs.d/custom
 
 SOURCES+=$(shell find -P .emacs.d/custom  \
                  -type f -iname '*.el' ! -iname '*~' \
