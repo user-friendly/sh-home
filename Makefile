@@ -60,13 +60,6 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 
 .PHONY: all clean uninstall enable test
 
-$(TARGET_DIR)/.emacs.d/nyan-mode-1.1.1:
-	@echo "You'll have to install Nyan Mode manually to: "; \
-	echo "$@"; \
-	if [ ! -e "$@" ]; then \
-		mkdir "$@"; \
-	fi
-
 $(TARGET_DIR)/%: %
 	@if [ -d "$<" ]; then \
 		if [ ! -d "$@" ]; then \
