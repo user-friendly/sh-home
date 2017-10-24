@@ -38,10 +38,10 @@
                   js2-mode
                   js2-refactor
                   lorem-ipsum
-                  magit
-                  magit-filenotify
-                  magit-find-file
-                  magit-popup
+;;                  magit
+;;                  magit-filenotify
+;;                  magit-find-file
+;;                  magit-popup
                   multiple-cursors
                   php-mode
 ;;                  popup
