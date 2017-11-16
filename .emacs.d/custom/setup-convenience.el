@@ -87,8 +87,14 @@
 (add-hook 'after-init-hook 'global-company-mode)
 ;; The next 3 magical lines make company use Clang as it's backend.
 (setq company-backends (delete 'company-semantic company-backends))
-;; (define-key c-mode-map  [(tab)] 'company-complete)
-;; (define-key c++-mode-map  [(tab)] 'company-complete)
+(add-hook 'c-mode-hook
+          '(lambda ()
+             (define-key c-mode-map  [(tab)] 'company-complete)
+             ))
+(add-hook 'c++-mode-hook
+          '(lambda ()
+             (define-key c++-mode-map  [(tab)] 'company-complete)
+             ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package: expand-region                       ;;
