@@ -13,6 +13,7 @@
 
 (let ((packages '(
                   color-theme
+                  company
                   diff-hl
 ;;                  drupal-mode
 ;;                  drupal-spell
@@ -20,6 +21,10 @@
                   flycheck
                   flyspell-correct
                   flyspell-correct-helm
+		  flycheck-tip
+;;                  flycheck-popup-tip
+		  flycheck-pos-tip
+                  expand-region
 ;;                  git-commit
                   gitignore-mode
                   helm
@@ -38,13 +43,13 @@
                   js2-mode
                   js2-refactor
                   lorem-ipsum
-;;                  magit
+                  magit
 ;;                  magit-filenotify
-;;                  magit-find-file
-;;                  magit-popup
+                  magit-find-file
+                  magit-popup
                   multiple-cursors
                   php-mode
-;;                  popup
+                  popup
                   projectile
                   projectile-speedbar
 ;;                  rebox2
