@@ -115,8 +115,6 @@
 ;; PACKAGE: None.             ;;
 ;;                            ;;
 ;; GROUP: Convenience.        ;;
-;;                            ;;
-;; I consider it convenience. ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (put 'narrow-to-defun  'disabled nil)
 (put 'narrow-to-page   'disabled nil)

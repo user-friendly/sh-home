@@ -80,6 +80,14 @@
 (global-diff-hl-mode)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PACKAGE: HideShow               ;;
+;;                                 ;;
+;; GROUP: Programming -> Languages ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+(add-hook 'php-mode 'hs-minor-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: elisp-format                       ;;
 ;;                                             ;;
