@@ -21,9 +21,9 @@
                   flycheck
                   flyspell-correct
                   flyspell-correct-helm
-		  flycheck-tip
+                  flycheck-tip
 ;;                  flycheck-popup-tip
-		  flycheck-pos-tip
+                  flycheck-pos-tip
                   expand-region
 ;;                  git-commit
                   gitignore-mode

@@ -58,6 +58,12 @@ tramp
 .org-id-locations
 *_archive
 
+# GNU Globals #
+###############
+GPATH
+GRTAGS
+GTAGS
+
 # Misc #
 ########
 *.diff
