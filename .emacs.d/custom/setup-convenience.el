@@ -89,11 +89,11 @@
 (setq company-backends (delete 'company-semantic company-backends))
 (add-hook 'c-mode-hook
           '(lambda ()
-             (define-key c-mode-map  [(tab)] 'company-complete)
+             (define-key c-mode-map  [C-tab] 'company-complete)
              ))
 (add-hook 'c++-mode-hook
           '(lambda ()
-             (define-key c++-mode-map  [(tab)] 'company-complete)
+             (define-key c++-mode-map  [C-tab] 'company-complete)
              ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
