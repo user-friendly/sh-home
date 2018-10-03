@@ -78,7 +78,7 @@ git-create-branch() {
 	# TODO Require param $2 to include remote name and deduce it.
 	git push $remote $branch
 	# Set upstream for newly created branch.
-	git branch --track $branch $remote/$branch
+	git branch $branch --set-upstream-to $remote/$branch
 	# Checkout new branch.
 	gco $branch
 }
