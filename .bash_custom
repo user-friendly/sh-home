@@ -15,8 +15,7 @@ function function_exists {
     return $?;
 }
 
-# TODO Do we really need the absolute path?
-CONF_DIR=$(readlink -f $HOME/.bash_conf.d)
+CONF_DIR=$HOME/.bash_conf.d
 
 # Do nothing if the config directory doesn't exist.
 if [ ! -d $CONF_DIR ]; then
@@ -25,11 +24,10 @@ if [ ! -d $CONF_DIR ]; then
 fi
 
 # Get all bash config files starting with numeric characters.
-CONF_FILES=$(find -L $CONF_DIR -type f -iname '[[:digit:]]*' ! -iname '*~' -printf '%f\n' | sort -n)
+CONF_FILES=$(find -L $CONF_DIR -type f -iname '[[:digit:]]*' ! -iname '*~' -print | sort -n)
 
 # Include all bash config files in order listed.
 for file in $CONF_FILES; do
-    file=$CONF_DIR/$file
     if [ -f $file ]; then
         printf "loading %s\n" $file
         source $file

@@ -22,6 +22,10 @@
 (when (not (eq system-type 'windows-nt)) 
   (setq dired-listing-switches "-lha --group-directories-first"))
 
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil)
+  )
+
 (require 'dired-x)                 ; Provide extra commands for Dired.
 
 ;; (define-key dired-mode-map "F" 'my-dired-find-file)
