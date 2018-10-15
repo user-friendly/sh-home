@@ -99,7 +99,7 @@ function _update_ps1 {
         fi
 
         if [ -z "${PS1_HOSTNAME_COLOR}" ]; then
-            if [ "$(uname -o)" = "Cygwin" ]; then
+            if [ "$OSTYPE" = "Cygwin" ]; then
                 PS1_HOSTNAME_COLOR="${On_IBlue}${BIWhite}"
             else
                 PS1_HOSTNAME_COLOR="${On_IGreen}${BIBlack}"
@@ -109,7 +109,7 @@ function _update_ps1 {
         PS1_HOSTNAME="${Color_Off}${PS1_HOSTNAME_COLOR}$PS1_HOSTNAME_USE${Color_Off}"
         
         if [ -z "${PS1_USER_COLOR}" ]; then
-            if [ "$(uname -o)" = "Cygwin" ]; then
+            if [ "$OSTYPE" = "Cygwin" ]; then
                 PS1_USER_COLOR="${Red}"
             else
                 PS1_USER_COLOR="${IWhite}"
@@ -118,7 +118,7 @@ function _update_ps1 {
         
         if [ -z "${PS1_SUPERUSER_COLOR}" ]; then
             PS1_SUPERUSER_COLOR="${Red}"
-        fi        
+        fi
         
         USER_TYPE_SIGN="$(_user_type_sign)"
         # TODO Not used. It had something to do with substitution.

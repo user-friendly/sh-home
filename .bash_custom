@@ -15,6 +15,12 @@ function function_exists {
     return $?;
 }
 
+
+# Determine OS type.
+if [ -z "$OSTYPE" ]; then
+    OSTYPE=$(uname)
+fi
+
 CONF_DIR=$HOME/.bash_conf.d
 
 # Do nothing if the config directory doesn't exist.
