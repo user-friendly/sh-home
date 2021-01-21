@@ -48,3 +48,7 @@
 
 ;; Enable helm mode.
 (helm-mode 1)
+
+;; Helm GTags setup.
+(setq helm-gtags-fuzzy-match t
+      )
