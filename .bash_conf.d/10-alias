@@ -30,6 +30,9 @@ alias a='ls -A'
 alias df='df --si'
 alias dz='du --si --max-depth=0'
 
+# Why? Why is the default OR?
+alias lsof='lsof -a'
+
 alias gs='git status'
 alias gp='git pull'
 alias git-reset='git reset --hard'
