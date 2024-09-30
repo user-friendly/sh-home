@@ -1,0 +1,16 @@
+if [ "$OSTYPE" = "cygwin" ]; then
+	
+	# Windows VirtualBox aliases
+
+	alias vboxmanage='VBoxManage'
+	alias vstat="vboxmanage list runningvms"
+	alias vup="vboxmanage startvm --type=headless"
+	alias vup-display="vboxmanage startvm"
+	vdown () {
+		vboxmanage controlvm $1 acpipowerbutton
+	}
+	vkill () {
+		vboxmanage controlvm $1 poweroff
+	}
+	
+fi
