@@ -11,6 +11,7 @@
 #     PATH="$HOME/bin:$PATH"
 # fi
 
-if [ -n "$BASH_VERSION" ] && [ ! -z "$PS1" ] && [ -f "$HOME/.bash_custom" ]; then
+if [ "$BASH_CUSTOM_INCLUDED" = "" ] && [ -n "$BASH_VERSION" ] \
+	&& [ ! -z "$PS1" ] && [ -f "$HOME/.bash_custom" ]; then
     . "$HOME/.bash_custom"
 fi

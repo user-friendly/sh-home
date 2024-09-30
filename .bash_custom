@@ -1,20 +1,10 @@
 # 
-# Custom bash goodies.
+# sh-home entry point.
 # 
 
-# !!!TODO Learn more about bash strings, variables, strings,
-#         substitutions, patterns, etc.
-
-printf "\n"
+export BASH_CUSTOM_INCLUDED=1
 
 export PATH="$PATH:$HOME/bin"
-
-# TODO Not really using this function.
-function function_exists {
-    declare -f -F $1;
-    return $?;
-}
-
 
 # Determine OS type.
 if [ -z "$OSTYPE" ]; then
@@ -25,7 +15,7 @@ CONF_DIR=$HOME/.bash_conf.d
 
 # Do nothing if the config directory doesn't exist.
 if [ ! -d $CONF_DIR ]; then
-    printf "conf dir not found: %s\n" $CONF_DIR
+    echo "conf dir not found: $CONF_DIR"
     exit 0
 fi
 
@@ -35,10 +25,7 @@ CONF_FILES=$(find -L $CONF_DIR -type f -iname '[[:digit:]]*' ! -iname '*~' -prin
 # Include all bash config files in order listed.
 for file in $CONF_FILES; do
     if [ -f $file ]; then
-        printf "loading %s\n" $file
+        echo "loading $file"
         source $file
     fi
 done
-
-printf "\n"
-
