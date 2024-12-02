@@ -21,9 +21,16 @@ def custom_float_format(value, p, cycle):
     if cycle:
         return p.pretty(value)
     if isinstance(value, float):
-        text = (ptf.float_format%value).split(".")
-        custom_int_format(int(text[0]), p, cycle)
-        return p.text("." + text[1])
+        text = ptf.float_format%value
+        sep = "e" if 'e' in text else "." 
+        text = text.split(sep)
+        
+        if not '.' in text[0]:
+            custom_int_format(int(text[0]), p, cycle)
+        else:
+            p.text(text[0])
+        
+        return p.text(sep + text[1])
     return p.pretty(value)
 
 # Attach the formatter to integers
