@@ -3,8 +3,7 @@ sh-home
 
 ## ABOUT
 
-Bash aliases, scripts and program configuration files tailored to my
-specific tastes.
+Personal bash aliases, scripts and program configuration files.
 
 ## CONTENTS
 
@@ -19,7 +18,7 @@ Emacs, tmux & git configuration files.
 
 ## Emacs
 
-Configuration structure is almost entirely based on Tu Do's Emacs tutorials.
+Configuration structure is almost entirely based on Tuh Do's Emacs tutorials.
 Visit http://tuhdo.github.io/ (https://github.com/tuhdo/tuhdo.github.io,
 https://github.com/tuhdo) for more information.
 

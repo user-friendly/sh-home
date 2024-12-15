@@ -5,7 +5,6 @@
 # FIXME Starting Tmux v2.2, the utf8 option has been removed.
 # It will be deduced automatically.
 
-# TODO Check if base dir is target dir. Fail if that is the case.
 BASE_DIR=$(PWD)
 TARGET_DIR=$(HOME)
 
@@ -59,7 +58,7 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 
 .DEFAULT_GOAL=all
 
-.PHONY: all clean uninstall enable test
+.PHONY: all clean uninstall enable is-enabled test
 
 $(TARGET_DIR)/.emacs.d/nyan-mode-1.1.1:
 	@echo "You'll have to install Nyan Mode manually to: "; \
@@ -100,6 +99,18 @@ enable:
 	echo -n "Startup snippet not found... "; \
 	$(ENABLE); \
 	echo "$(ENABLED_MESSAGE)"
+
+is-enabled:
+	@echo "Is custom bash enabled?"
+	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
+		echo "Shell startup file not found: $(SHELL_STARTUP_FILE_TARGET)"; \
+		exit 1; \
+	fi; \
+	if [ ! -z "$$($(IS_ENABLED))" ]; then \
+		echo $(ENABLED_MESSAGE); \
+		exit 0; \
+	fi; \
+	echo $(DISABLED_MESSAGE);
 
 disable:
 	@if [ ! -f "$(SHELL_STARTUP_FILE_TARGET)" ]; then \
