@@ -28,7 +28,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq nyan-animate-nyancat t nyan-animation-frame-interval 0.5 nyan-wavy-trail
       t)
-(if (load-user-file "nyan-mode-1.1.1/nyan-mode") 
+(if (load-user-file "nyan-mode-main/nyan-mode") 
     (nyan-mode t) 
   (display-warning "nyan-mode" "You'll need to install Nyan Mode manually." 
                    :warning))

@@ -75,7 +75,7 @@
 ;; GROUP: Convenience -> Linum ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
-(global-linum-mode t)
+(global-display-line-numbers-mode 1)
 (setq linum-format "%4d ")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

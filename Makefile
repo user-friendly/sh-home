@@ -19,7 +19,7 @@ SOURCES+=.bash_conf.d $(shell find -P .bash_conf.d  \
 SOURCES+=.emacs \
 	.emacs.d \
 	.emacs.d/custom \
-	.emacs.d/nyan-mode-1.1.1
+	.emacs.d/nyan-mode-main
 
 SOURCES+=$(shell find -P .emacs.d/custom  \
                  -type f -iname '*.el' ! -iname '*~' \
@@ -61,7 +61,7 @@ DISABLE=sed --posix -i '/'"$(START_HEADER)"'/,/'"$(END_FOOTER)"'/ d' "$(SHELL_ST
 
 .PHONY: all clean uninstall enable test
 
-$(TARGET_DIR)/.emacs.d/nyan-mode-1.1.1:
+$(TARGET_DIR)/.emacs.d/nyan-mode-main:
 	@echo "You'll have to install Nyan Mode manually to: "; \
 	echo "$@"; \
 	if [ ! -e "$@" ]; then \

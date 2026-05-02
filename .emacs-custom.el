@@ -16,7 +16,7 @@
  '(erc-insert-timestamp-function (quote erc-insert-timestamp-left-and-right))
  '(erc-interpret-mirc-color nil nil nil "Nice! It would be awesome to see some color for a change.")
  '(erc-join-buffer (quote bury))
- '(erc-nick "plamen")
+ '(erc-nick "userfriendly")
  '(erc-server-reconnect-timeout 10)
  '(erc-timestamp-format "[%T]")
  '(erc-timestamp-format-right " [%T]")

@@ -39,16 +39,16 @@
 (require 'setup-programming)
 (require 'setup-text)
 (require 'setup-local)
-(require 'setup-helm)
+;(require 'setup-helm) ;; FIXME Doesn't work as of 05/02/2026.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: workgroups2              ;;
 ;;                                   ;;
 ;; GROUP: Convenience -> Workgroups2 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'workgroups2)
+;(require 'workgroups2) ;; FIXME Doesn't work as of 05/02/2026.
 ;; Change workgroups session file
-(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+;(setq wg-session-file "~/.emacs.d/.emacs_workgroups") ;; FIXME Doesn't work as of 05/02/2026.
 ;; (workgroups-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
