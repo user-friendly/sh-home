@@ -2,9 +2,9 @@
 # sh-home entry point.
 # 
 
-export BASH_CUSTOM_INCLUDED=1
+BASH_CUSTOM_INCLUDED=1
 
-export PATH="$PATH:$HOME/bin"
+PATH="$PATH:$HOME/bin"
 
 # Determine OS type.
 if [ -z "$OSTYPE" ]; then
