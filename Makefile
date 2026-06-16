@@ -25,6 +25,10 @@ SOURCES+=$(shell find -P .emacs.d/custom  \
                  -type f -iname '*.el' ! -iname '*~' \
 				 2>/dev/null | sort -n 2>/dev/null)
 
+SOURCES+=$(shell find -P .ipython/profile_default/startup \
+                 -type f -iname '[[:digit:]]*' ! -iname '*~' \
+                                 2>/dev/null | sort -n 2>/dev/null)
+
 TARGET_SOURCES=$(foreach file,$(SOURCES),$(TARGET_DIR)/$(file))
 
 # Whether to skip uninstalling directories or not.
