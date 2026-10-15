@@ -109,7 +109,7 @@
 ;;                                  ;;
 ;; GROUP: Convenience -> Projectile ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(projectile-global-mode)
+(projectile-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: None.             ;;
