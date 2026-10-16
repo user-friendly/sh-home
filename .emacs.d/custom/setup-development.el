@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;
 ;; Setup development group.
 ;;
