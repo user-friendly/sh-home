@@ -61,7 +61,7 @@
 ;; GROUP: Programming -> Tools -> Makefile
 ;; takenn from prelude-c.el:48: https://github.com/bbatsov/prelude/blob/master/modules/prelude-c.el
 (defun prelude-makefile-mode-defaults ()
-  (whitespace-toggle-options '(tabs))
+  ;; (whitespace-toggle-options '(tabs))
   (setq indent-tabs-mode t))
 
 (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
