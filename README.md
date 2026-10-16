@@ -23,6 +23,8 @@ Configuration structure is almost entirely based on Tu Do's Emacs tutorials.
 Visit http://tuhdo.github.io/ (https://github.com/tuhdo/tuhdo.github.io,
 https://github.com/tuhdo) for more information.
 
+The customization file (.emacs.d/custom.el) is NOT installed to avoid overrides.
+
 ## TODO
 
 Don't load emacs backup files from .bash_conf.d (usually ending in ~).

@@ -17,6 +17,11 @@
 ;; Lethe
 ;; Midnight
 
+;; Set customization file.
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;; Add your modules path.
 (add-to-list 'load-path "~/.emacs.d/custom/")
 
