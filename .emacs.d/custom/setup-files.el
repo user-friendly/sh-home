@@ -22,9 +22,10 @@
 (when (not (eq system-type 'windows-nt)) 
   (setq dired-listing-switches "-lha --group-directories-first"))
 
+;; MacOS does not have the group dirs first option.
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil)
-  )
+  (setq dired-listing-switches "-lha"))
 
 (require 'dired-x)                 ; Provide extra commands for Dired.
 
