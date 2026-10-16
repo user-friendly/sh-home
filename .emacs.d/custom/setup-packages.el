@@ -14,7 +14,7 @@
 (package-initialize)
 
 (let ((packages '(
-                  color-theme
+                  color-theme-modern
                   company
                   diff-hl
 ;;                  drupal-mode

@@ -18,13 +18,13 @@
     (menu-bar-mode -1))
 
 (add-hook 'after-init-hook 
-          (lambda () 
-            (require 'color-theme) 
-            (color-theme-initialize) 
-            (color-theme-install (color-theme-jsc-dark))) 
-          (when (not (window-system)) ; On terminals, the default highlighting face is not legible.
-            (set-face-attribute 'hl-line t 
+          (lambda ()
+            (load-theme 'jsc-dark t t)
+            (enable-theme 'jsc-dark)
+            (when (not (window-system)) ; On terminals, the default highlighting face is not legible.
+              (set-face-attribute 'hl-line t
                                 :inherit nil
                                 :weight 'bold
                                 :underline '(:color foreground-color 
                                                     :style line))))
+          )
