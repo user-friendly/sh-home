@@ -39,7 +39,7 @@
 (require 'setup-programming)
 (require 'setup-text)
 (require 'setup-local)
-;(require 'setup-helm) ;; FIXME Doesn't work as of 05/02/2026.
+(require 'setup-helm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: workgroups2              ;;
